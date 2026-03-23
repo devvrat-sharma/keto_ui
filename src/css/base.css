@@ -1,0 +1,246 @@
+/* ==========================================================================
+   Keto UI — Base & Design Tokens
+   Premium visionOS & Apple Glass aesthetics with beautiful, structured tokens.
+   ========================================================================== */
+
+:root {
+  color-scheme: light dark;
+
+  --k-blue: #007AFF;
+  --k-green: #34C759;
+  --k-indigo: #5856D6;
+  --k-orange: #FF9500;
+  --k-pink: #FF2D55;
+  --k-purple: #AF52DE;
+  --k-red: #FF3B30;
+  --k-teal: #5AC8FA;
+  --k-yellow: #FFCC00;
+  --k-gray-1: #8E8E93;
+  --k-gray-2: #AEAEB2;
+  --k-gray-3: #C7C7CC;
+  --k-gray-4: #D1D1D6;
+  --k-gray-5: #E5E5EA;
+  --k-gray-6: #F2F2F7;
+
+  --k-primary: var(--k-blue);
+  --k-primary-hover: #0066D6;
+  --k-primary-active: #0052AB;
+  --k-primary-fg: #ffffff;
+  --k-primary-light: rgba(0, 122, 255, 0.1);
+
+  --k-secondary: var(--k-gray-1);
+  --k-secondary-hover: #7C7C82;
+  --k-secondary-light: rgba(142, 142, 147, 0.12);
+
+  --k-success: var(--k-green);
+  --k-warning: var(--k-orange);
+  --k-danger: var(--k-red);
+  --k-info: var(--k-teal);
+
+  /* --- Light Theme Defaults (macOS/visionOS Light Mode) --- */
+  --k-bg: #F5F5F7;
+  --k-bg-secondary: rgba(255, 255, 255, 0.65);
+  --k-bg-tertiary: rgba(0, 0, 0, 0.03);
+
+  --k-surface: rgba(255, 255, 255, 0.75);
+  --k-surface-alt: rgba(255, 255, 255, 0.45);
+
+  --k-text: #1d1d1f;
+  --k-text-sec: #86868b;
+  --k-text-ter: #a1a1a6;
+  
+  --k-border: rgba(0, 0, 0, 0.08);
+  --k-border-focus: rgba(0, 122, 255, 0.5);
+  
+  /* --- Premium Glassmorphism Foundation --- */
+  --k-glass-bg-thin: rgba(255, 255, 255, 0.35);
+  --k-glass-bg: rgba(255, 255, 255, 0.65);
+  --k-glass-bg-heavy: rgba(255, 255, 255, 0.85);
+  --k-glass-blur: 24px;
+  --k-glass-blur-heavy: 40px;
+  
+  --k-glass-border-thin: rgba(255, 255, 255, 0.2);
+  --k-glass-border: rgba(255, 255, 255, 0.4);
+  --k-glass-border-heavy: rgba(255, 255, 255, 0.6);
+  
+  --k-glass-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.04);
+  --k-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.08);
+  --k-glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.3) inset;
+  
+  --k-glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.9), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+  --k-glass-highlight-subtle: inset 0 1px 1px rgba(255, 255, 255, 0.4);
+
+  /* --- Spacing --- */
+  --k-sp-1: 0.25rem;
+  --k-sp-2: 0.5rem;
+  --k-sp-3: 0.75rem;
+  --k-sp-4: 1rem;
+  --k-sp-5: 1.5rem;
+  --k-sp-6: 2rem;
+  --k-sp-8: 3rem;
+  --k-sp-10: 4rem;
+
+  /* --- Borders --- */
+  --k-rad-sm: 6px;
+  --k-rad: 10px;
+  --k-rad-lg: 14px;
+  --k-rad-xl: 20px;
+  --k-rad-2xl: 24px;
+  --k-rad-full: 9999px;
+
+  /* --- Depth --- */
+  --k-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --k-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --k-shadow-lg: 0 12px 24px rgba(0, 0, 0, 0.12);
+  
+  --k-z-base: 1;
+  --k-z-drop: 100;
+  --k-z-nav: 200;
+  --k-z-modal: 300;
+  --k-z-toast: 400;
+
+  /* --- Typography --- */
+  --k-font: "Inter", -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol";
+  --k-font-mono: ui-monospace, SFMono-Regular, "SF Mono", Menlo, Consolas, "Liberation Mono", monospace;
+
+  /* --- Motion --- */
+  --k-ease: cubic-bezier(0.2, 0.8, 0.2, 1); /* Apple-like smooth spring */
+  --k-ease-in: cubic-bezier(0.4, 0, 1, 1);
+  --k-ease-out: cubic-bezier(0, 0, 0.2, 1);
+  --k-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --k-ease-spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1); /* visionOS bouncy feel */
+  
+  --k-trans: 0.2s var(--k-ease);
+  --k-trans-slow: 0.4s var(--k-ease);
+  --k-trans-fast: 0.1s var(--k-ease-out);
+}
+
+/* ==========================================================================
+   Dark Theme (macOS/visionOS Dark Mode style)
+   ========================================================================== */
+
+[data-theme="dark"] {
+  /* Slightly adjusted system colors for dark mode visibility */
+  --k-blue: #0A84FF;
+  --k-green: #32D74B;
+  --k-indigo: #5E5CE6;
+  --k-orange: #FF9F0A;
+  --k-pink: #FF375F;
+  --k-purple: #BF5AF2;
+  --k-red: #FF453A;
+  --k-teal: #64D2FF;
+  --k-yellow: #FFD60A;
+
+  --k-primary: var(--k-blue);
+  --k-primary-hover: #1E8FFF;
+  --k-primary-active: #0070E0;
+
+  --k-bg: #000000;
+  --k-bg-secondary: rgba(28, 28, 30, 0.72);
+  --k-bg-tertiary: rgba(44, 44, 46, 0.6);
+
+  --k-surface: rgba(44, 44, 46, 0.6);
+  --k-surface-alt: rgba(255, 255, 255, 0.08);
+
+  --k-text: #F5F5F7;
+  --k-text-sec: #86868B;
+  --k-text-ter: #515154;
+
+  --k-border: rgba(255, 255, 255, 0.12);
+  --k-border-focus: rgba(10, 132, 255, 0.6);
+  
+  /* Premium Glass in dark mode is translucent grey/black with lighter borders and noise */
+  --k-glass-bg-thin: rgba(28, 28, 30, 0.35);
+  --k-glass-bg: rgba(28, 28, 30, 0.65);
+  --k-glass-bg-heavy: rgba(28, 28, 30, 0.85);
+
+  --k-glass-border-thin: rgba(255, 255, 255, 0.05);
+  --k-glass-border: rgba(255, 255, 255, 0.12);
+  --k-glass-border-heavy: rgba(255, 255, 255, 0.2);
+
+  --k-glass-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+  --k-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+  --k-glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+
+  --k-glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+  --k-glass-highlight-subtle: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme="light"]) {
+    --k-blue: #0A84FF;
+    --k-green: #32D74B;
+    --k-indigo: #5E5CE6;
+    --k-orange: #FF9F0A;
+    --k-pink: #FF375F;
+    --k-purple: #BF5AF2;
+    --k-red: #FF453A;
+    --k-teal: #64D2FF;
+    --k-yellow: #FFD60A;
+  
+    --k-primary: var(--k-blue);
+    --k-primary-hover: #1E8FFF;
+    --k-primary-active: #0070E0;
+
+    --k-bg: #000000;
+    --k-bg-secondary: rgba(28, 28, 30, 0.72);
+    --k-bg-tertiary: rgba(44, 44, 46, 0.6);
+  
+    --k-surface: rgba(44, 44, 46, 0.6);
+    --k-surface-alt: rgba(255, 255, 255, 0.08);
+  
+    --k-text: #F5F5F7;
+    --k-text-sec: #86868B;
+    --k-text-ter: #515154;
+  
+    --k-border: rgba(255, 255, 255, 0.12);
+    --k-border-focus: rgba(10, 132, 255, 0.6);
+    
+    --k-glass-bg-thin: rgba(28, 28, 30, 0.35);
+    --k-glass-bg: rgba(28, 28, 30, 0.65);
+    --k-glass-bg-heavy: rgba(28, 28, 30, 0.85);
+
+    --k-glass-border-thin: rgba(255, 255, 255, 0.05);
+    --k-glass-border: rgba(255, 255, 255, 0.12);
+    --k-glass-border-heavy: rgba(255, 255, 255, 0.2);
+
+    --k-glass-shadow-sm: 0 4px 12px rgba(0, 0, 0, 0.2);
+    --k-glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+    --k-glass-shadow-lg: 0 16px 48px rgba(0, 0, 0, 0.6), 0 0 0 1px rgba(255, 255, 255, 0.08) inset;
+
+    --k-glass-highlight: inset 0 1px 1px rgba(255, 255, 255, 0.12), inset 0 0 0 1px rgba(255, 255, 255, 0.05);
+    --k-glass-highlight-subtle: inset 0 1px 1px rgba(255, 255, 255, 0.05);
+  }
+}
+
+/* ==========================================================================
+   Minimal Reset
+   ========================================================================== */
+
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--k-font);
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--k-text);
+  background-color: var(--k-bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+img, picture, video, canvas, svg {
+  display: block;
+  max-width: 100%;
+}
+
+input, button, textarea, select {
+  font: inherit;
+}
+
+p, h1, h2, h3, h4, h5, h6 {
+  overflow-wrap: break-word;
+}

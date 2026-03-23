@@ -1,0 +1,94 @@
+/* ==========================================================================
+   Keto UI — Progress & Spinners
+   Translucent animated loading indicators.
+   ========================================================================== */
+
+progress {
+  display: block;
+  width: 100%;
+  height: 0.5rem;
+  border: none;
+  border-radius: var(--k-rad-full);
+  background-color: var(--k-glass-bg-thin);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  overflow: hidden;
+  appearance: none;
+  margin-bottom: var(--k-sp-4);
+  box-shadow: inset 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+
+progress::-webkit-progress-bar {
+  background-color: transparent;
+  border-radius: var(--k-rad-full);
+}
+
+progress::-webkit-progress-value {
+  background-color: var(--k-primary);
+  border-radius: var(--k-rad-full);
+  transition: width var(--k-trans-slow);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+}
+
+progress::-moz-progress-bar {
+  background-color: var(--k-primary);
+  border-radius: var(--k-rad-full);
+  background-image: linear-gradient(90deg, rgba(255,255,255,0.1), rgba(255,255,255,0));
+}
+
+/* Variants */
+progress[data-variant="success"]::-webkit-progress-value { background-color: var(--k-success); }
+progress[data-variant="success"]::-moz-progress-bar { background-color: var(--k-success); }
+
+progress[data-variant="warning"]::-webkit-progress-value { background-color: var(--k-warning); }
+progress[data-variant="warning"]::-moz-progress-bar { background-color: var(--k-warning); }
+
+progress[data-variant="danger"]::-webkit-progress-value { background-color: var(--k-danger); }
+progress[data-variant="danger"]::-moz-progress-bar { background-color: var(--k-danger); }
+
+/* Spinner */
+.spinner {
+  display: inline-block;
+  width: 1.5rem;
+  height: 1.5rem;
+  border: 2px solid var(--k-glass-border-heavy);
+  border-top-color: var(--k-primary);
+  border-radius: var(--k-rad-full);
+  animation: k-spin 0.8s cubic-bezier(0.4, 0.1, 0.4, 0.9) infinite;
+}
+
+.spinner-sm { width: 1rem; height: 1rem; border-width: 2px; }
+.spinner-lg { width: 2.25rem; height: 2.25rem; border-width: 3px; }
+
+@keyframes k-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* Skeleton Loading Layer */
+.skeleton {
+  background: linear-gradient(
+    90deg,
+    var(--k-glass-bg-thin) 25%,
+    var(--k-glass-bg) 50%,
+    var(--k-glass-bg-thin) 75%
+  );
+  background-size: 200% 100%;
+  animation: k-skeleton 1.5s var(--k-ease-spring) infinite;
+  border-radius: var(--k-rad);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  min-height: 1rem;
+}
+
+.skeleton-text {
+  height: 0.875rem;
+  margin-bottom: var(--k-sp-2);
+  width: 100%;
+}
+.skeleton-text:last-child { width: 75%; }
+.skeleton-circle { border-radius: var(--k-rad-full); }
+
+@keyframes k-skeleton {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}

@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Keto UI — Modals
+   Stunning frosted glass dialogs with bouncy spring animations.
+   ========================================================================== */
+
+dialog {
+  background-color: var(--k-glass-bg-heavy);
+  backdrop-filter: blur(var(--k-glass-blur-heavy));
+  -webkit-backdrop-filter: blur(var(--k-glass-blur-heavy));
+  border: 1px solid var(--k-glass-border-heavy);
+  box-shadow: var(--k-glass-shadow-lg), var(--k-glass-highlight);
+  border-radius: var(--k-rad-2xl);
+  color: var(--k-text);
+  padding: 0;
+  max-width: min(90vw, 32rem);
+  width: 100%;
+  position: fixed;
+  animation: k-modal-in 0.4s var(--k-ease-spring-bouncy) forwards;
+  opacity: 0;
+}
+
+dialog[open] {
+  display: flex;
+  flex-direction: column;
+}
+
+/* Native backdrop styling */
+dialog::backdrop {
+  background-color: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  animation: k-fade-in 0.3s var(--k-ease-out) forwards;
+}
+
+/* Modal Sections */
+dialog > header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: var(--k-sp-5) var(--k-sp-6) var(--k-sp-4);
+  border-bottom: 1px solid var(--k-glass-border-thin);
+}
+
+dialog > header h1, dialog > header h2, dialog > header h3, dialog > header h4 {
+  margin: 0;
+  font-size: 1.25rem;
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+dialog > section, .modal-body {
+  padding: var(--k-sp-4) var(--k-sp-6);
+  overflow-y: auto;
+  max-height: 60vh;
+  font-size: 0.9375rem;
+}
+
+dialog > footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--k-sp-2);
+  padding: var(--k-sp-4) var(--k-sp-6);
+  border-top: 1px solid var(--k-glass-border-thin);
+  background-color: var(--k-surface-alt);
+}
+
+/* Close btn */
+dialog button[data-close] {
+  background: var(--k-surface-alt);
+  border: none;
+  color: var(--k-text-sec);
+  cursor: pointer;
+  width: 2rem;
+  height: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: var(--k-rad-full);
+  font-size: 1.25rem;
+  line-height: 1;
+  box-shadow: none;
+  transition: all 0.2s var(--k-ease-spring);
+}
+
+dialog button[data-close]:hover {
+  color: var(--k-text);
+  background-color: var(--k-glass-bg);
+  transform: scale(1.05);
+}
+
+dialog button[data-close]:active {
+  transform: scale(0.9);
+}
+
+/* Sizes */
+dialog.modal-sm { max-width: min(90vw, 24rem); }
+dialog.modal-lg { max-width: min(90vw, 48rem); }
+
+@keyframes k-modal-in {
+  0% { opacity: 0; transform: scale(1.05) translateY(10px); }
+  100% { opacity: 1; transform: scale(1) translateY(0); }
+}
+
+@keyframes k-fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}

@@ -1,0 +1,108 @@
+/* ==========================================================================
+   Keto UI — Utilities
+   Severely trimmed utilities to maintain <60kb target.
+   ========================================================================== */
+
+/* Spacing Helpers (essential only) */
+.m-0 { margin: 0; }
+.mt-4 { margin-top: var(--k-sp-4); }
+.mb-2 { margin-bottom: var(--k-sp-2); }
+.mb-4 { margin-bottom: var(--k-sp-4); }
+
+.p-0 { padding: 0; }
+.p-4 { padding: var(--k-sp-4); }
+
+/* Display */
+.block { display: block; }
+.inline-block { display: inline-block; }
+.hidden { display: none !important; }
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+/* Text */
+.text-center { text-align: center; }
+.text-right { text-align: right; }
+.text-bold { font-weight: 600; }
+.text-sm { font-size: 0.875rem; }
+
+.text-muted { color: var(--k-text-sec); }
+.text-primary { color: var(--k-primary); }
+.text-danger { color: var(--k-danger); }
+.text-success { color: var(--k-success); }
+
+.truncate {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+/* Sizing */
+.w-full { width: 100%; }
+.h-full { height: 100%; }
+.max-w-md { max-width: 28rem; }
+
+/* Avatar */
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  border-radius: var(--k-rad-full);
+  background-color: var(--k-surface-alt);
+  color: var(--k-text-sec);
+  font-weight: 600;
+  font-size: 0.875rem;
+  overflow: hidden;
+  flex-shrink: 0;
+  border: 1px solid var(--k-border);
+}
+
+.avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.avatar-sm { width: 1.75rem; height: 1.75rem; font-size: 0.75rem; }
+.avatar-lg { width: 3.5rem; height: 3.5rem; font-size: 1.125rem; }
+
+/* Divider */
+.divider {
+  display: flex;
+  align-items: center;
+  gap: var(--k-sp-3);
+  color: var(--k-text-ter);
+  font-size: 0.8125rem;
+  margin: var(--k-sp-4) 0;
+}
+
+.divider::before,
+.divider::after {
+  content: "";
+  flex: 1;
+  border-top: 1px solid var(--k-border);
+}
+
+/* Tag */
+.tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--k-sp-1);
+  padding: 0.125rem 0.6rem;
+  font-size: 0.8125rem;
+  background-color: var(--k-surface-alt);
+  border: 1px solid var(--k-border);
+  border-radius: var(--k-rad);
+  color: var(--k-text-sec);
+}

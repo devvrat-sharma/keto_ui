@@ -1,0 +1,118 @@
+/* ==========================================================================
+   Keto UI — Cards
+   Premium glassmorphism surface with translucent borders and soft shadows.
+   ========================================================================== */
+
+.card,
+article {
+  background-color: var(--k-glass-bg);
+  backdrop-filter: blur(var(--k-glass-blur));
+  -webkit-backdrop-filter: blur(var(--k-glass-blur));
+  border: 1px solid var(--k-glass-border);
+  box-shadow: var(--k-glass-shadow), var(--k-glass-highlight);
+  border-radius: var(--k-rad-2xl);
+  overflow: hidden;
+  transition: transform var(--k-trans-slow), box-shadow var(--k-trans-slow), background-color var(--k-trans-slow), border-color var(--k-trans-slow);
+}
+
+.card:hover,
+article:hover {
+  transform: translateY(-4px) scale(1.01);
+  box-shadow: var(--k-glass-shadow-lg), var(--k-glass-highlight);
+  background-color: var(--k-glass-bg-heavy);
+  border-color: var(--k-glass-border-heavy);
+}
+
+.card:active,
+article:active {
+  transform: translateY(-1px) scale(0.99);
+  transition: transform 0.1s var(--k-ease-spring-bouncy);
+}
+
+/* --- Content Areas --- */
+.card > header,
+article > header {
+  padding: var(--k-sp-5) var(--k-sp-6) var(--k-sp-4);
+  border-bottom: 1px solid var(--k-glass-border-thin);
+}
+
+.card > header h1,
+.card > header h2,
+.card > header h3,
+.card > header h4,
+article > header h1,
+article > header h2,
+article > header h3,
+article > header h4 {
+  margin-bottom: var(--k-sp-1);
+  font-size: 1.25rem;
+  letter-spacing: -0.02em;
+}
+
+.card > header p,
+article > header p {
+  color: var(--k-text-sec);
+  font-size: 0.9375rem;
+  margin-bottom: 0;
+}
+
+.card > section,
+.card-body,
+article > section {
+  padding: var(--k-sp-4) var(--k-sp-6);
+}
+
+.card > footer,
+article > footer {
+  padding: var(--k-sp-4) var(--k-sp-6);
+  border-top: 1px solid var(--k-glass-border-thin);
+  background-color: var(--k-surface-alt);
+  display: flex;
+  align-items: center;
+  gap: var(--k-sp-3);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.1);
+}
+
+/* --- Media --- */
+.card > img:first-child,
+article > img:first-child {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-bottom: 1px solid var(--k-glass-border-thin);
+}
+
+/* Clickable */
+.card[onclick],
+.card:has(> a:only-child) {
+  cursor: pointer;
+}
+
+/* --- Variants --- */
+.card-flat,
+article[data-variant="flat"] {
+  border: 1px solid var(--k-border);
+  background-color: var(--k-surface-alt);
+  backdrop-filter: none;
+  -webkit-backdrop-filter: none;
+  box-shadow: none;
+  border-radius: var(--k-rad-xl);
+}
+
+.card-ghost,
+article[data-variant="ghost"] {
+  background-color: transparent;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: none;
+  border-color: transparent;
+  border-radius: var(--k-rad-xl);
+}
+
+.card-ghost:hover,
+article[data-variant="ghost"]:hover {
+  background-color: var(--k-glass-bg-thin);
+  box-shadow: var(--k-shadow-sm);
+  border-color: var(--k-glass-border-thin);
+  transform: none;
+}

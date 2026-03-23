@@ -1,0 +1,77 @@
+/* ==========================================================================
+   Keto UI — Badges
+   Sleek translucent pill-shaped tags.
+   ========================================================================== */
+
+.badge,
+[data-badge] {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--k-sp-1);
+  padding: 0.2rem 0.6rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.5;
+  border-radius: var(--k-rad-full);
+  white-space: nowrap;
+  background-color: var(--k-primary-light);
+  color: var(--k-blue);
+  border: 1px solid rgba(10, 132, 255, 0.15);
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  vertical-align: middle;
+}
+
+/* --- Variants --- */
+.badge-sec,
+[data-badge="sec"],
+[data-badge="secondary"] {
+  background-color: var(--k-surface-alt);
+  color: var(--k-text-sec);
+  border-color: var(--k-glass-border-thin);
+}
+
+.badge-success,
+[data-badge="success"] {
+  background-color: rgba(52, 199, 89, 0.1);
+  color: var(--k-green);
+  border-color: rgba(52, 199, 89, 0.15);
+}
+
+.badge-warning,
+[data-badge="warning"] {
+  background-color: rgba(255, 149, 0, 0.1);
+  color: var(--k-orange);
+  border-color: rgba(255, 149, 0, 0.2);
+}
+
+.badge-danger,
+[data-badge="danger"] {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--k-red);
+  border-color: rgba(255, 59, 48, 0.15);
+}
+
+.badge-info,
+[data-badge="info"] {
+  background-color: rgba(90, 200, 250, 0.1);
+  color: var(--k-teal);
+  border-color: rgba(90, 200, 250, 0.15);
+}
+
+/* Solid */
+.badge-solid {
+  background-color: var(--k-primary);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  box-shadow: 0 2px 4px rgba(10, 132, 255, 0.2);
+}
+
+/* Dot Indicator */
+.badge-dot::before {
+  content: "";
+  width: 0.375rem;
+  height: 0.375rem;
+  border-radius: var(--k-rad-full);
+  background-color: currentColor;
+}

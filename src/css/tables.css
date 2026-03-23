@@ -1,0 +1,78 @@
+/* ==========================================================================
+   Keto UI — Tables
+   Lightweight, data-dense Apple-style tables.
+   ========================================================================== */
+
+.table-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  margin-bottom: var(--k-sp-4);
+  border-radius: var(--k-rad);
+  border: 1px solid var(--k-border);
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.875rem;
+  background-color: var(--k-surface);
+}
+
+/* Header */
+thead th {
+  text-align: left;
+  font-weight: 500;
+  color: var(--k-text-sec);
+  padding: var(--k-sp-3) var(--k-sp-4);
+  border-bottom: 1px solid var(--k-border);
+  background-color: var(--k-surface-alt);
+  white-space: nowrap;
+}
+
+/* Body */
+tbody td {
+  padding: var(--k-sp-3) var(--k-sp-4);
+  border-bottom: 1px solid var(--k-border);
+  color: var(--k-text);
+  vertical-align: middle;
+}
+
+/* Remove bottom border on last row */
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Hover */
+tbody tr:hover {
+  background-color: var(--k-surface-alt);
+}
+
+/* Striped */
+table[data-striped] tbody tr:nth-child(even),
+.table-striped tbody tr:nth-child(even) {
+  background-color: var(--k-surface-alt);
+}
+
+/* Compact */
+table[data-compact] th,
+table[data-compact] td,
+.table-compact th,
+.table-compact td {
+  padding: var(--k-sp-2) var(--k-sp-3);
+  font-size: 0.8125rem;
+}
+
+/* Footer & Caption */
+tfoot td {
+  padding: var(--k-sp-3) var(--k-sp-4);
+  font-weight: 500;
+  background-color: var(--k-surface-alt);
+  border-top: 2px solid var(--k-border);
+}
+
+caption {
+  font-size: 0.875rem;
+  color: var(--k-text-sec);
+  padding: var(--k-sp-2) 0;
+  text-align: left;
+}

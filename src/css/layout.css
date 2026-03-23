@@ -1,0 +1,64 @@
+/* ==========================================================================
+   Keto UI — Layout
+   Container, basic grid utilities, essential flexbox.
+   ========================================================================== */
+
+/* --- Container --- */
+.container {
+  width: 100%;
+  max-width: 1200px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--k-sp-4);
+  padding-right: var(--k-sp-4);
+}
+
+.container-sm { max-width: 720px; }
+.container-lg { max-width: 1400px; }
+
+section {
+  padding: var(--k-sp-8) 0;
+}
+
+/* --- Basic Grid --- */
+.grid {
+  display: grid;
+  gap: var(--k-sp-4);
+}
+
+.grid-2 { grid-template-columns: repeat(2, 1fr); }
+.grid-3 { grid-template-columns: repeat(3, 1fr); }
+.grid-4 { grid-template-columns: repeat(4, 1fr); }
+
+/* Auto-fit responsive grid */
+.grid-auto {
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+
+/* --- Flexbox Essentials --- */
+.flex { display: flex; }
+.flex-col { display: flex; flex-direction: column; }
+.flex-center { display: flex; align-items: center; justify-content: center; }
+.flex-between { display: flex; align-items: center; justify-content: space-between; }
+.flex-wrap { flex-wrap: wrap; }
+
+/* Flex auto sizing */
+.flex-1 { flex: 1; }
+
+/* Gap */
+.gap-2 { gap: var(--k-sp-2); }
+.gap-4 { gap: var(--k-sp-4); }
+
+/* --- Responsive Helpers --- */
+@media (max-width: 768px) {
+  .grid-2,
+  .grid-3,
+  .grid-4 {
+    grid-template-columns: 1fr;
+  }
+  .hide-mobile { display: none !important; }
+}
+
+@media (min-width: 769px) {
+  .hide-desktop { display: none !important; }
+}

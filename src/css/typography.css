@@ -1,0 +1,122 @@
+/* ==========================================================================
+   Keto UI — Typography
+   Apple-inspired clear typographic hierarchy, utilizing clamp for fluidity.
+   ========================================================================== */
+
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  line-height: 1.15;
+  color: var(--k-text);
+  margin-bottom: var(--k-sp-3);
+  letter-spacing: -0.025em;
+}
+
+/* Fluid sizes */
+h1 { font-size: clamp(2.25rem, 5vw, 3rem); letter-spacing: -0.035em; font-weight: 700; }
+h2 { font-size: clamp(1.75rem, 4vw, 2.25rem); letter-spacing: -0.02em; }
+h3 { font-size: clamp(1.35rem, 3vw, 1.75rem); letter-spacing: -0.015em; }
+h4 { font-size: 1.25rem; letter-spacing: -0.01em; }
+h5 { font-size: 1.125rem; font-weight: 500; }
+h6 { font-size: 1rem; font-weight: 500; text-transform: uppercase; letter-spacing: 0.05em; color: var(--k-text-sec); }
+
+p {
+  margin-bottom: var(--k-sp-4);
+  max-width: 70ch;
+  line-height: 1.6;
+}
+
+a {
+  color: var(--k-primary);
+  text-decoration: none;
+  transition: opacity var(--k-trans), color var(--k-trans);
+}
+
+a:hover {
+  opacity: 0.8;
+  text-decoration: underline;
+}
+
+a:active {
+  opacity: 0.6;
+}
+
+strong, b {
+  font-weight: 600;
+  color: var(--k-text);
+}
+
+small {
+  font-size: 0.875rem;
+  color: var(--k-text-sec);
+}
+
+mark {
+  background-color: var(--k-yellow);
+  color: rgba(0, 0, 0, 0.9);
+  padding: 0 0.2em;
+  border-radius: var(--k-rad-sm);
+}
+
+/* Code */
+code, kbd, pre {
+  font-family: var(--k-font-mono);
+  font-size: 0.875em;
+}
+
+code {
+  background-color: var(--k-surface-alt);
+  color: var(--k-pink);
+  padding: 0.2em 0.4em;
+  border-radius: var(--k-rad-sm);
+  border: 1px solid var(--k-border);
+}
+
+pre {
+  background-color: var(--k-glass-bg);
+  backdrop-filter: blur(var(--k-glass-blur));
+  -webkit-backdrop-filter: blur(var(--k-glass-blur));
+  border: 1px solid var(--k-glass-border);
+  border-radius: var(--k-rad-lg);
+  padding: var(--k-sp-4);
+  overflow-x: auto;
+  margin-bottom: var(--k-sp-4);
+  font-size: 0.875rem;
+  line-height: 1.6;
+  box-shadow: var(--k-glass-shadow-sm);
+}
+
+pre code {
+  background: none;
+  color: inherit;
+  padding: 0;
+  border: none;
+}
+
+/* Blockquotes */
+blockquote {
+  border-left: 3px solid var(--k-primary);
+  padding-left: var(--k-sp-4);
+  margin: 0 0 var(--k-sp-4) 0;
+  color: var(--k-text-sec);
+  font-style: italic;
+  background: linear-gradient(90deg, var(--k-primary-light) 0%, transparent 100%);
+  padding-top: var(--k-sp-2);
+  padding-bottom: var(--k-sp-2);
+  border-radius: 0 var(--k-rad) var(--k-rad) 0;
+}
+
+/* Lists */
+ul, ol {
+  padding-left: var(--k-sp-5);
+  margin-bottom: var(--k-sp-4);
+  line-height: 1.6;
+}
+
+li {
+  margin-bottom: var(--k-sp-2);
+}
+
+li > ul, li > ol {
+  margin-top: var(--k-sp-2);
+  margin-bottom: 0;
+}

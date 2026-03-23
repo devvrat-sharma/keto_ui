@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Keto UI — Tooltips
+   CSS-only tooltips using `data-tooltip` attribute.
+   ========================================================================== */
+
+[data-tooltip] {
+  position: relative;
+  cursor: help;
+}
+
+[data-tooltip]::before,
+[data-tooltip]::after {
+  position: absolute;
+  z-index: var(--k-z-drop);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transition: all 0.2s var(--k-ease-spring-bouncy);
+}
+
+/* Bubble */
+[data-tooltip]::after {
+  content: attr(data-tooltip);
+  bottom: calc(100% + 8px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  padding: 0.375rem 0.625rem;
+  font-size: 0.75rem;
+  font-weight: 500;
+  line-height: 1.4;
+  white-space: nowrap;
+  color: var(--k-text);
+  background-color: var(--k-glass-bg-heavy);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid var(--k-glass-border-heavy);
+  border-radius: var(--k-rad);
+  max-width: 250px;
+  text-align: center;
+  box-shadow: 0 4px 16px rgba(0,0,0,0.1), var(--k-glass-highlight);
+}
+
+/* Arrow */
+[data-tooltip]::before {
+  content: "";
+  bottom: calc(100% + 4px);
+  left: 50%;
+  transform: translateX(-50%) scale(0.9);
+  border: 4px solid transparent;
+  border-top-color: var(--k-glass-border-heavy);
+}
+
+/* Show on hover / focus */
+[data-tooltip]:hover::before,
+[data-tooltip]:hover::after,
+[data-tooltip]:focus-visible::before,
+[data-tooltip]:focus-visible::after {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) scale(1);
+}
+
+/* Positions — Right */
+[data-tooltip-pos="right"]::after {
+  bottom: auto;
+  left: calc(100% + 8px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
+}
+
+[data-tooltip-pos="right"]::before {
+  bottom: auto;
+  left: calc(100% + 4px);
+  top: 50%;
+  transform: translateY(-50%) scale(0.9);
+  border-top-color: transparent;
+  border-right-color: var(--k-glass-border-heavy);
+}
+
+[data-tooltip-pos="right"]:hover::after,
+[data-tooltip-pos="right"]:focus-visible::after {
+  transform: translateY(-50%) scale(1);
+}
+
+[data-theme="dark"] [data-tooltip]::after {
+  background-color: rgba(44, 44, 46, 0.85); /* Slightly darker for dark mode tooltip readibility */
+  color: #fff;
+}

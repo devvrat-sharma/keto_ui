@@ -1,0 +1,1 @@
+!function(){const o=document.currentScript,s=o?o.src.replace(/keto\.js$/,""):"./src/";["js/tabs.js","js/dropdown.js","js/modal.js","js/accordion.js","js/toast.js"].forEach(o=>{const e=document.createElement("script");e.src=s+o,e.defer=!0,document.head.appendChild(e)}),window.Keto=window.Keto||{},window.Keto.version="0.1.2"}();

@@ -1,0 +1,247 @@
+/* ==========================================================================
+   Keto UI — Buttons
+   Premium visionOS & Apple-styled buttons with translucency, subtle shadows, and spring logic.
+   ========================================================================== */
+
+button,
+[role="button"],
+.btn,
+input[type="submit"],
+input[type="reset"],
+input[type="button"] {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--k-sp-2);
+  padding: 0.5rem 1.125rem;
+  font-family: var(--k-font);
+  font-size: 0.9375rem; /* 15px */
+  font-weight: 500;
+  color: var(--k-primary-fg);
+  background-color: var(--k-primary);
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  border-radius: var(--k-rad-lg);
+  cursor: pointer;
+  text-decoration: none;
+  white-space: nowrap;
+  user-select: none;
+  transition: transform var(--k-trans-fast), background-color var(--k-trans), box-shadow var(--k-trans), border-color var(--k-trans);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+  -webkit-tap-highlight-color: transparent;
+}
+
+button:hover,
+[role="button"]:hover,
+.btn:hover {
+  background-color: var(--k-primary-hover);
+  box-shadow: 0 4px 14px rgba(var(--k-primary), 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.25);
+}
+
+button:active,
+[role="button"]:active,
+.btn:active {
+  transform: scale(0.95);
+  background-color: var(--k-primary-active);
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.05), inset 0 1px 2px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s var(--k-ease-spring), background-color 0.1s, box-shadow 0.1s;
+}
+
+/* --- Variants --- */
+
+/* Secondary */
+.btn-secondary,
+button[data-variant="secondary"] {
+  background-color: var(--k-secondary-light);
+  color: var(--k-text);
+  border-color: var(--k-glass-border);
+  box-shadow: var(--k-shadow-sm);
+}
+
+.btn-secondary:hover,
+button[data-variant="secondary"]:hover {
+  background-color: rgba(142, 142, 147, 0.2);
+  border-color: var(--k-glass-border-heavy);
+}
+
+/* Soft (tinted bg / translucent layer) */
+.btn-soft,
+button[data-variant="soft"] {
+  background-color: var(--k-glass-bg-thin);
+  color: var(--k-primary);
+  border: 1px solid var(--k-glass-border-thin);
+  box-shadow: var(--k-shadow-sm);
+  backdrop-filter: blur(var(--k-glass-blur));
+  -webkit-backdrop-filter: blur(var(--k-glass-blur));
+}
+
+.btn-soft:hover,
+button[data-variant="soft"]:hover {
+  background-color: var(--k-primary-light);
+  border-color: var(--k-glass-border);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.btn-soft:active,
+button[data-variant="soft"]:active {
+  background-color: var(--k-surface-alt);
+}
+
+/* Outline */
+.btn-outline,
+button[data-variant="outline"] {
+  background-color: transparent;
+  color: var(--k-text);
+  border-color: var(--k-border);
+  box-shadow: none;
+}
+
+.btn-outline:hover,
+button[data-variant="outline"]:hover {
+  background-color: var(--k-surface-alt);
+  border-color: var(--k-text-ter);
+}
+
+/* Ghost */
+.btn-ghost,
+button[data-variant="ghost"] {
+  background-color: transparent;
+  color: var(--k-primary);
+  border-color: transparent;
+  box-shadow: none;
+}
+
+.btn-ghost:hover,
+button[data-variant="ghost"]:hover {
+  background-color: var(--k-surface-alt);
+  color: var(--k-primary-hover);
+}
+
+/* Danger */
+.btn-danger,
+button[data-variant="danger"] {
+  background-color: var(--k-danger);
+  color: #fff;
+}
+
+.btn-danger:hover,
+button[data-variant="danger"]:hover {
+  background-color: #E0352B;
+  box-shadow: 0 4px 14px rgba(255, 59, 48, 0.3), inset 0 1px 0 rgba(255, 255, 255, 0.2);
+}
+
+/* Premium / Gradient (New) */
+.btn-premium,
+button[data-variant="premium"] {
+  background: linear-gradient(135deg, var(--k-purple) 0%, var(--k-primary) 100%);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 0 4px 16px rgba(175, 82, 222, 0.4), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+  text-shadow: 0 1px 1px rgba(0,0,0,0.2);
+}
+
+.btn-premium:hover,
+button[data-variant="premium"]:hover {
+  background: linear-gradient(135deg, #B560E5 0%, #1A85FF 100%);
+  box-shadow: 0 6px 20px rgba(175, 82, 222, 0.5), inset 0 1px 1px rgba(255, 255, 255, 0.3);
+}
+
+/* --- Sizes --- */
+.btn-sm,
+button[data-size="sm"] {
+  padding: 0.375rem 0.875rem;
+  font-size: 0.8125rem;
+  border-radius: var(--k-rad);
+}
+
+.btn-lg,
+button[data-size="lg"] {
+  padding: 0.75rem 1.75rem;
+  font-size: 1.0625rem;
+  border-radius: var(--k-rad-xl);
+  font-weight: 600;
+}
+
+/* --- Icon Button --- */
+.btn-icon,
+button[data-variant="icon"] {
+  padding: 0.5rem;
+  border-radius: var(--k-rad-full);
+  background: transparent;
+  color: var(--k-text-sec);
+  box-shadow: none;
+  border-color: transparent;
+}
+
+.btn-icon:hover,
+button[data-variant="icon"]:hover {
+  background-color: var(--k-surface-alt);
+  color: var(--k-text);
+}
+
+/* --- States --- */
+button:disabled,
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none !important;
+  box-shadow: none !important;
+  background-color: var(--k-gray-4);
+  color: var(--k-text-ter);
+  border-color: transparent;
+}
+
+/* Loading */
+button[aria-busy="true"],
+.btn-loading {
+  position: relative;
+  color: transparent !important;
+  pointer-events: none;
+}
+
+button[aria-busy="true"]::after,
+.btn-loading::after {
+  content: "";
+  position: absolute;
+  width: 1.25em;
+  height: 1.25em;
+  border: 2px solid var(--k-primary-fg, #fff);
+  border-right-color: transparent;
+  border-radius: var(--k-rad-full);
+  animation: k-btn-spin 0.6s linear infinite;
+  inset: 0;
+  margin: auto;
+}
+
+button[data-variant="outline"][aria-busy="true"]::after,
+button[data-variant="ghost"][aria-busy="true"]::after,
+button[data-variant="secondary"][aria-busy="true"]::after {
+  border-color: var(--k-primary);
+  border-right-color: transparent;
+}
+
+@keyframes k-btn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* --- Button Group --- */
+.btn-group {
+  display: inline-flex;
+}
+
+.btn-group > button,
+.btn-group > .btn {
+  border-radius: 0;
+  box-shadow: none;
+}
+
+.btn-group > :first-child {
+  border-radius: var(--k-rad-lg) 0 0 var(--k-rad-lg);
+}
+
+.btn-group > :last-child {
+  border-radius: 0 var(--k-rad-lg) var(--k-rad-lg) 0;
+}
+
+.btn-group > :not(:first-child) {
+  margin-left: -1px;
+}

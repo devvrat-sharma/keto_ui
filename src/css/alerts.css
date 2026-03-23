@@ -1,0 +1,100 @@
+/* ==========================================================================
+   Keto UI — Alerts
+   Premium translucent notification banners.
+   ========================================================================== */
+
+[role="alert"],
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--k-sp-3);
+  padding: var(--k-sp-4) var(--k-sp-4);
+  border-radius: var(--k-rad-xl);
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  margin-bottom: var(--k-sp-4);
+  background-color: var(--k-primary-light);
+  color: var(--k-blue);
+  border: 1px solid rgba(10, 132, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  box-shadow: 0 4px 12px rgba(10, 132, 255, 0.05);
+}
+
+/* --- Variants --- */
+.alert-success,
+[role="alert"][data-type="success"] {
+  background-color: rgba(52, 199, 89, 0.1);
+  color: var(--k-green);
+  border-color: rgba(52, 199, 89, 0.2);
+  box-shadow: 0 4px 12px rgba(52, 199, 89, 0.05);
+}
+
+.alert-warning,
+[role="alert"][data-type="warning"] {
+  background-color: rgba(255, 149, 0, 0.1);
+  color: var(--k-orange);
+  border-color: rgba(255, 149, 0, 0.3);
+  box-shadow: 0 4px 12px rgba(255, 149, 0, 0.05);
+}
+
+.alert-danger,
+[role="alert"][data-type="danger"],
+[role="alert"][data-type="error"] {
+  background-color: rgba(255, 59, 48, 0.1);
+  color: var(--k-red);
+  border-color: rgba(255, 59, 48, 0.2);
+  box-shadow: 0 4px 12px rgba(255, 59, 48, 0.05);
+}
+
+.alert-info,
+[role="alert"][data-type="info"] {
+  background-color: rgba(90, 200, 250, 0.1);
+  color: var(--k-teal);
+  border-color: rgba(90, 200, 250, 0.2);
+  box-shadow: 0 4px 12px rgba(90, 200, 250, 0.05);
+}
+
+/* Title emphasis */
+.alert strong:first-child {
+  display: block;
+  margin-bottom: var(--k-sp-1);
+  font-size: 1rem;
+}
+
+/* Text color helper inside alert */
+.alert p {
+  color: var(--k-text);
+  margin-bottom: 0;
+  opacity: 0.9;
+}
+.alert p:not(:last-child) {
+  margin-bottom: var(--k-sp-2);
+}
+
+/* Dismissible */
+.alert-dismiss {
+  margin-left: auto;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: inherit;
+  opacity: 0.6;
+  width: 1.5rem;
+  height: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  border-radius: var(--k-rad-full);
+  transition: opacity var(--k-trans), background-color var(--k-trans);
+}
+
+.alert-dismiss:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.05);
+}
+
+[data-theme="dark"] .alert-dismiss:hover {
+  background-color: rgba(255, 255, 255, 0.1);
+}

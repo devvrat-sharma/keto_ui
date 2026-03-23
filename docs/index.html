@@ -1,0 +1,1591 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Keto UI — Ultralight glass-era components for the modern web. Under 15 KB, zero dependencies.">
+  <meta name="robots" content="index, follow">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Keto UI — Ultralight Glass-Era Components">
+  <meta property="og:description" content="Apple-inspired frosted UI components under 15 KB with zero dependencies.">
+  <meta property="og:image" content="/og-image.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Keto UI — Ultralight Glass-Era Components">
+  <meta name="twitter:description" content="Apple-inspired frosted UI components under 15 KB with zero dependencies.">
+  <meta name="twitter:image" content="/og-image.png">
+  <title>Keto UI — Ultralight Glass-Era Components</title>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "SoftwareApplication",
+      "name": "Keto UI",
+      "applicationCategory": "DeveloperApplication",
+      "operatingSystem": "Web",
+      "description": "Ultralight glass-era UI component library under 15 KB with zero dependencies.",
+      "license": "https://opensource.org/licenses/MIT"
+    }
+  </script>
+  <link rel="stylesheet" href="../src/keto.css">
+  <script src="../src/keto.js" defer></script>
+  <style>
+    /* ═══ GRAIN TEXTURE ═══ */
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      pointer-events: none;
+      opacity: 0.028;
+      mix-blend-mode: overlay;
+      background: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence baseFrequency='0.7' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.5'/%3E%3C/svg%3E");
+      background-size: 200px;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      overflow-x: hidden;
+      background: var(--k-bg);
+      background-image:
+        radial-gradient(ellipse 90% 70% at 10% 0%, rgba(99, 102, 241, 0.18) 0%, transparent 55%),
+        radial-gradient(ellipse 70% 60% at 90% 15%, rgba(236, 72, 153, 0.15) 0%, transparent 50%),
+        radial-gradient(ellipse 55% 55% at 50% 90%, rgba(52, 199, 89, 0.12) 0%, transparent 50%),
+        radial-gradient(ellipse 45% 40% at 60% 50%, rgba(245, 158, 11, 0.08) 0%, transparent 45%);
+      background-attachment: fixed;
+    }
+
+    /* ═══ FLOATING ORBS ═══ */
+    .orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(80px);
+      pointer-events: none;
+      z-index: 0;
+      will-change: transform;
+      animation: orb-drift 22s ease-in-out infinite alternate;
+    }
+    .orb-1 { width: 700px; height: 700px; background: rgba(99, 102, 241, 0.3); top: -15%; left: -12%; opacity: 0.6; }
+    .orb-2 { width: 600px; height: 600px; background: rgba(236, 72, 153, 0.25); top: 20%; right: -18%; opacity: 0.55; animation-delay: -6s; animation-direction: alternate-reverse; }
+    .orb-3 { width: 550px; height: 550px; background: rgba(16, 185, 129, 0.2); bottom: -10%; left: 10%; opacity: 0.5; animation-delay: -12s; }
+    @keyframes orb-drift {
+      0%   { transform: translate(0, 0) scale(1); }
+      25%  { transform: translate(40px, -60px) scale(1.12); }
+      50%  { transform: translate(-30px, 30px) scale(0.92); }
+      75%  { transform: translate(20px, -20px) scale(1.05); }
+      100% { transform: translate(0, 0) scale(1); }
+    }
+
+    /* ═══ FLOATING NAV ═══ */
+    .doc-nav {
+      position: fixed;
+      top: var(--k-sp-3);
+      left: 50%;
+      transform: translateX(-50%);
+      z-index: var(--k-z-nav);
+      display: flex;
+      align-items: center;
+      gap: var(--k-sp-1);
+      padding: 0.45rem 1.25rem;
+      border-radius: var(--k-rad-full);
+      background: var(--k-glass-bg-heavy);
+      backdrop-filter: blur(var(--k-glass-blur-heavy));
+      -webkit-backdrop-filter: blur(var(--k-glass-blur-heavy));
+      border: 1px solid var(--k-glass-border);
+      box-shadow: var(--k-glass-shadow-lg);
+      max-width: calc(100% - 2rem);
+    }
+    .doc-nav .brand {
+      font-weight: 800;
+      font-size: 0.9375rem;
+      color: var(--k-text);
+      text-decoration: none;
+      margin-right: auto;
+      padding-right: var(--k-sp-5);
+      white-space: nowrap;
+      letter-spacing: -0.02em;
+    }
+    .doc-nav .brand span { opacity: 0.35; font-weight: 400; font-size: 0.6875rem; margin-left: 0.35rem; }
+    .doc-links { display: flex; align-items: center; gap: 2px; }
+    .doc-links a {
+      font-size: 0.8125rem;
+      font-weight: 500;
+      color: var(--k-text-sec);
+      text-decoration: none;
+      padding: 0.35rem 0.7rem;
+      border-radius: var(--k-rad-full);
+      transition: all var(--k-trans);
+      white-space: nowrap;
+    }
+    .doc-links a:hover { color: var(--k-text); background: var(--k-surface-alt); text-decoration: none; opacity: 1; }
+    .mode-btn {
+      width: 2rem; height: 2rem;
+      border-radius: var(--k-rad-full) !important;
+      padding: 0 !important;
+      background: var(--k-surface-alt) !important;
+      color: var(--k-text-sec) !important;
+      border: 1px solid var(--k-glass-border-thin) !important;
+      box-shadow: none !important;
+      font-size: 1rem;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      margin-left: var(--k-sp-2);
+      transition: transform 0.3s var(--k-ease-spring-bouncy), background-color var(--k-trans);
+    }
+    .mode-btn:hover { background: var(--k-glass-bg) !important; transform: rotate(40deg) scale(1.1); }
+
+    /* ═══ LAYOUT ═══ */
+    .page { position: relative; z-index: 1; }
+    .wrap { max-width: 940px; margin: 0 auto; padding: 0 var(--k-sp-5); }
+
+    /* ═══ HERO ═══ */
+    .hero {
+      padding: 11rem 0 5rem;
+      text-align: center;
+      position: relative;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      width: 500px; height: 500px;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -55%);
+      background: radial-gradient(circle, rgba(99, 102, 241, 0.15) 0%, rgba(236, 72, 153, 0.08) 40%, transparent 70%);
+      border-radius: 50%;
+      filter: blur(60px);
+      pointer-events: none;
+      z-index: -1;
+    }
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: var(--k-sp-2);
+      font-size: 0.75rem;
+      font-weight: 600;
+      color: var(--k-primary);
+      background: var(--k-glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      padding: 0.35rem 1rem;
+      border-radius: var(--k-rad-full);
+      border: 1px solid var(--k-glass-border);
+      margin-bottom: var(--k-sp-5);
+      letter-spacing: 0.04em;
+      text-transform: uppercase;
+      box-shadow: 0 0 20px rgba(99, 102, 241, 0.08);
+    }
+    .hero h1 {
+      font-size: clamp(3.25rem, 9vw, 5.5rem);
+      font-weight: 850;
+      line-height: 1;
+      letter-spacing: -0.05em;
+      margin-bottom: var(--k-sp-5);
+      background: linear-gradient(135deg, #6366f1 0%, #a855f7 25%, #ec4899 50%, #f97316 75%, #6366f1 100%);
+      background-size: 300% 300%;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      animation: hero-shimmer 8s ease-in-out infinite;
+    }
+    @keyframes hero-shimmer {
+      0%, 100% { background-position: 0% 50%; }
+      50% { background-position: 100% 50%; }
+    }
+    .hero .lead {
+      font-size: 1.1875rem;
+      color: var(--k-text-sec);
+      max-width: 46ch;
+      margin: 0 auto var(--k-sp-6);
+      line-height: 1.65;
+    }
+    .hero-actions { display: flex; gap: var(--k-sp-3); justify-content: center; flex-wrap: wrap; }
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: var(--k-sp-8);
+      margin-top: var(--k-sp-10);
+      font-size: 0.8125rem;
+      color: var(--k-text-ter);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+    }
+    .hero-stats strong {
+      display: block;
+      font-size: 1.75rem;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      font-family: var(--k-font-mono);
+      background: linear-gradient(135deg, var(--k-text), var(--k-primary));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 0.15rem;
+    }
+
+    /* ═══ FEATURE CARDS ═══ */
+    .features {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: var(--k-sp-4);
+      padding: var(--k-sp-8) 0 var(--k-sp-10);
+    }
+    .feat {
+      padding: var(--k-sp-5) var(--k-sp-5) var(--k-sp-4);
+      border-radius: var(--k-rad-xl);
+      background: var(--k-glass-bg);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border: 1px solid var(--k-glass-border);
+      box-shadow: var(--k-glass-shadow-sm);
+      transition: transform 0.35s var(--k-ease-spring-bouncy), box-shadow 0.35s var(--k-ease), border-color 0.35s;
+      position: relative;
+      overflow: hidden;
+    }
+    .feat::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 0; right: 0;
+      height: 3px;
+      background: linear-gradient(90deg, var(--k-primary), var(--k-purple), var(--k-pink));
+      opacity: 0;
+      transition: opacity 0.3s;
+    }
+    .feat:hover { transform: translateY(-4px); box-shadow: var(--k-glass-shadow); border-color: var(--k-glass-border-heavy); }
+    .feat:hover::before { opacity: 1; }
+    .feat h4 { font-size: 0.9375rem; margin-bottom: var(--k-sp-2); letter-spacing: -0.01em; }
+    .feat p { font-size: 0.8125rem; color: var(--k-text-sec); margin: 0; line-height: 1.6; }
+
+    /* ═══ COMPONENT SECTION ═══ */
+    .comp { padding: var(--k-sp-10) 0 var(--k-sp-8); }
+    .comp + .comp {
+      border-top: 1px solid transparent;
+      border-image: linear-gradient(90deg, transparent, var(--k-border), transparent) 1;
+    }
+    .comp-label {
+      display: inline-block;
+      font-size: 0.625rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--k-primary);
+      background: var(--k-primary-light);
+      padding: 0.2rem 0.6rem;
+      border-radius: var(--k-rad-full);
+      margin-bottom: var(--k-sp-3);
+    }
+    .comp-label.wc { color: var(--k-purple); background: rgba(175, 82, 222, 0.1); }
+    .comp > h2 {
+      font-size: 1.625rem;
+      margin-bottom: var(--k-sp-2);
+      letter-spacing: -0.025em;
+      font-weight: 700;
+    }
+    .comp > h2 a { color: inherit; text-decoration: none; }
+    .comp > h2 a:hover { color: var(--k-primary); text-decoration: none; opacity: 1; }
+    .comp > p.desc {
+      color: var(--k-text-sec);
+      font-size: 0.9375rem;
+      margin-bottom: var(--k-sp-6);
+      max-width: 58ch;
+      line-height: 1.6;
+    }
+    .comp h3 { font-size: 1.0625rem; margin-top: var(--k-sp-8); margin-bottom: var(--k-sp-4); font-weight: 600; }
+
+    /* ═══ STAGE (component preview) ═══ */
+    .stage {
+      padding: var(--k-sp-6);
+      border: 1px solid var(--k-glass-border);
+      border-radius: var(--k-rad-2xl) var(--k-rad-2xl) 0 0;
+      background: var(--k-glass-bg);
+      backdrop-filter: blur(16px);
+      -webkit-backdrop-filter: blur(16px);
+      position: relative;
+      z-index: 1;
+      box-shadow: var(--k-glass-highlight-subtle);
+    }
+    .stage::before {
+      content: '';
+      position: absolute;
+      inset: -1px;
+      border-radius: inherit;
+      background: conic-gradient(
+        from 180deg,
+        transparent 55%,
+        rgba(99, 102, 241, 0.4) 70%,
+        rgba(168, 85, 247, 0.4) 80%,
+        rgba(236, 72, 153, 0.3) 90%,
+        transparent 100%
+      );
+      z-index: -1;
+      opacity: 0;
+      transition: opacity 0.5s var(--k-ease);
+      filter: blur(4px);
+    }
+    .stage:hover::before { opacity: 1; }
+    .stage-row { display: flex; flex-wrap: wrap; gap: var(--k-sp-3); align-items: center; }
+
+    /* ═══ CODE BLOCKS (dark) ═══ */
+    .code-wrap {
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      border-top: none;
+      border-radius: 0 0 var(--k-rad-2xl) var(--k-rad-2xl);
+      background: #0d0e1a;
+      overflow: hidden;
+      margin-bottom: var(--k-sp-6);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+    .code-wrap pre {
+      margin: 0; border: none; border-radius: 0;
+      background: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      padding: var(--k-sp-4) var(--k-sp-5);
+      overflow-x: auto;
+    }
+    .code-wrap pre code {
+      background: none !important;
+      color: #b4b8cc !important;
+      padding: 0 !important;
+      border: none !important;
+      font-size: inherit;
+    }
+    .code-wrap.collapsed pre { display: none; }
+    .code-btn {
+      display: flex; align-items: center; gap: var(--k-sp-2);
+      width: 100%;
+      padding: 0.5rem 1.25rem !important;
+      background: rgba(255, 255, 255, 0.04) !important;
+      border: none !important;
+      border-radius: 0 !important;
+      color: rgba(180, 184, 204, 0.5) !important;
+      font-size: 0.6875rem !important;
+      font-weight: 600 !important;
+      text-transform: uppercase !important;
+      letter-spacing: 0.06em !important;
+      cursor: pointer;
+      text-align: left;
+      box-shadow: none !important;
+      font-family: var(--k-font) !important;
+      transition: color 0.2s;
+      transform: none !important;
+    }
+    .code-btn:hover { color: rgba(180, 184, 204, 0.8) !important; background: rgba(255, 255, 255, 0.06) !important; }
+    .code-wrap:not(.collapsed) .code-btn { border-bottom: 1px solid rgba(255, 255, 255, 0.06) !important; }
+
+    /* ═══ STANDALONE CODE ═══ */
+    .code-solo {
+      border-radius: var(--k-rad-2xl);
+      background: #0d0e1a;
+      border: 1px solid rgba(255, 255, 255, 0.06);
+      margin-bottom: var(--k-sp-6);
+      box-shadow: inset 0 2px 8px rgba(0, 0, 0, 0.3);
+      overflow: hidden;
+    }
+    .code-solo pre {
+      margin: 0;
+      border: none !important;
+      border-radius: var(--k-rad-2xl) !important;
+      background: transparent !important;
+      box-shadow: none !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      font-size: 0.8125rem;
+      line-height: 1.7;
+      padding: var(--k-sp-5) var(--k-sp-5);
+      overflow-x: auto;
+    }
+    .code-solo pre code {
+      background: none !important;
+      color: #b4b8cc !important;
+      padding: 0 !important;
+      border: none !important;
+    }
+
+    /* ═══ THEME SECTION ═══ */
+    .theme-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: var(--k-sp-3);
+      margin-bottom: var(--k-sp-6);
+    }
+    .theme-card {
+      padding: var(--k-sp-4) var(--k-sp-3);
+      border-radius: var(--k-rad-xl);
+      border: 2px solid var(--k-border);
+      cursor: pointer;
+      transition: all 0.3s var(--k-ease-spring-bouncy);
+      text-align: center;
+      background: var(--k-glass-bg);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+    .theme-card:hover { border-color: var(--k-text-ter); transform: translateY(-3px) scale(1.02); }
+    .theme-card.active {
+      border-color: var(--k-primary);
+      box-shadow: 0 0 0 3px var(--k-primary-light), 0 8px 24px rgba(99, 102, 241, 0.1);
+    }
+    .theme-card .swatch {
+      display: flex; gap: 5px; justify-content: center;
+      margin-bottom: var(--k-sp-2);
+    }
+    .theme-card .swatch span {
+      width: 1.5rem; height: 1.5rem;
+      border-radius: var(--k-rad-full);
+      border: 2px solid rgba(255, 255, 255, 0.6);
+      box-shadow: 0 2px 6px rgba(0, 0, 0, 0.12);
+    }
+    .theme-card .label { font-size: 0.6875rem; font-weight: 700; color: var(--k-text-sec); text-transform: uppercase; letter-spacing: 0.04em; }
+
+    .theme-live {
+      background: var(--k-glass-bg);
+      backdrop-filter: blur(var(--k-glass-blur));
+      -webkit-backdrop-filter: blur(var(--k-glass-blur));
+      border: 1px solid var(--k-glass-border);
+      border-radius: var(--k-rad-2xl);
+      padding: var(--k-sp-6);
+      box-shadow: var(--k-glass-shadow);
+      max-width: 34rem;
+      transition: all 0.5s var(--k-ease);
+    }
+
+    /* ═══ SCROLL REVEAL ═══ */
+    .reveal {
+      opacity: 0;
+      transform: translateY(32px);
+      transition: opacity 0.7s var(--k-ease), transform 0.7s var(--k-ease);
+    }
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* ═══ GRADIENT DIVIDER ═══ */
+    .grad-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--k-primary), var(--k-purple), var(--k-pink), transparent);
+      opacity: 0.25;
+      margin: var(--k-sp-6) 0;
+      border: none;
+    }
+
+    /* ═══ FOOTER ═══ */
+    .doc-footer {
+      padding: var(--k-sp-8) 0 var(--k-sp-6);
+      text-align: center;
+      color: var(--k-text-ter);
+      font-size: 0.8125rem;
+      margin-top: var(--k-sp-8);
+      position: relative;
+    }
+    .doc-footer::before {
+      content: '';
+      position: absolute;
+      top: 0; left: 50%;
+      transform: translateX(-50%);
+      width: 120px; height: 1px;
+      background: linear-gradient(90deg, transparent, var(--k-border), transparent);
+    }
+    .doc-footer a { color: var(--k-text-sec); }
+
+    /* ═══ RESPONSIVE ═══ */
+    @media (max-width: 640px) {
+      .doc-links a:not(:last-child) { display: none; }
+      .hero { padding: 8rem 0 3rem; }
+      .hero h1 { font-size: 2.5rem; }
+      .hero-stats { gap: var(--k-sp-4); flex-wrap: wrap; justify-content: center; }
+      .wrap { padding: 0 var(--k-sp-4); }
+      .stage { padding: var(--k-sp-4); }
+      .comp { padding: var(--k-sp-6) 0 var(--k-sp-4); }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+
+  <!-- ═══ Floating Nav ═══ -->
+  <nav class="doc-nav" id="nav">
+    <a href="#" class="brand">✦ Keto <span>v0.1</span></a>
+    <div class="doc-links">
+      <a href="#components">Components</a>
+      <a href="#theming">Theming</a>
+      <a href="#install">Install</a>
+      <a href="#install">Get Started</a>
+      <button class="mode-btn" onclick="toggleMode()" aria-label="Toggle dark mode" id="mode-btn">☀</button>
+    </div>
+  </nav>
+
+  <div class="page">
+    <div class="wrap">
+
+      <!-- ═══ Hero ═══ -->
+      <div class="hero reveal">
+        <h1>Ultralight glass&#8209;era components</h1>
+        <div class="hero-actions">
+          <a href="#components"><button>Browse components</button></a>
+          <a href="#install"><button data-variant="outline">Get started</button></a>
+        </div>
+      </div>
+
+      <!-- ═══ Features ═══ -->
+      <div class="features reveal">
+        <div class="feat">
+          <h4>✦ Frosted Glass</h4>
+          <p>Every surface uses <code>backdrop-filter</code> with translucent RGBA layers. Cards, dialogs, navs — everything floats like glass panels.</p>
+        </div>
+        <div class="feat">
+          <h4>🫧 Depth &amp; Vibrancy</h4>
+          <p>Layered translucency, glass borders, and multi-layer shadows create real visual depth — inspired by visionOS and macOS Sonoma.</p>
+        </div>
+        <div class="feat">
+          <h4>📐 Semantic &amp; Classless</h4>
+          <p>Style <code>&lt;button&gt;</code>, <code>&lt;dialog&gt;</code>, <code>&lt;table&gt;</code> directly. Keto targets native elements and <code>data-*</code> attributes.</p>
+        </div>
+        <div class="feat">
+          <h4>🎨 Variable Theming</h4>
+          <p>Override <code>--k-*</code> CSS tokens and the entire library re-skins. Ships with 4 built-in theme presets.</p>
+        </div>
+        <div class="feat">
+          <h4>⚡ Two-File Drop-In</h4>
+          <p>One <code>&lt;link&gt;</code> + one <code>&lt;script defer&gt;</code>. Works from CDN, local, or npm. No bundler required.</p>
+        </div>
+        <div class="feat">
+          <h4>♿ Accessible</h4>
+          <p>ARIA roles, focus management, keyboard navigation, and <code>prefers-color-scheme</code> baked into every component.</p>
+        </div>
+      </div>
+
+      <div class="grad-divider"></div>
+      <div id="components"></div>
+
+      <!-- ═══ Typography ═══ -->
+      <section class="comp reveal" id="typography">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#typography">Typography</a></h2>
+        <p class="desc">All headings, paragraphs, links, lists, and code blocks are polished the moment you include Keto. No classes.</p>
+        <div class="stage">
+          <h1 style="margin-bottom:var(--k-sp-2)">Heading 1</h1>
+          <h2 style="margin-bottom:var(--k-sp-2)">Heading 2</h2>
+          <h3 style="margin-bottom:var(--k-sp-2)">Heading 3</h3>
+          <h4 style="margin-bottom:var(--k-sp-2)">Heading 4</h4>
+          <p>Paragraph with <strong>bold</strong>, <em>italic</em>, <a href="#">a link</a>, and <code>inline code</code>.</p>
+          <pre><code>const greet = () => console.log('Hello!');</code></pre>
+          <blockquote>Blockquote — styled automatically.</blockquote>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;h1&gt;Heading 1&lt;/h1&gt;
+&lt;p&gt;Paragraph with &lt;strong&gt;bold&lt;/strong&gt; and &lt;a href="#"&gt;a link&lt;/a&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const greet = () =&gt; console.log('Hello!');&lt;/code&gt;&lt;/pre&gt;
+&lt;blockquote&gt;Blockquote — styled automatically.&lt;/blockquote&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Accordion ═══ -->
+      <section class="comp reveal" id="accordion">
+        <span class="comp-label wc">Web Component</span>
+        <h2><a href="#accordion">Accordion</a></h2>
+        <p class="desc">Native <code>&lt;details&gt;</code>/<code>&lt;summary&gt;</code>. Add <code>data-exclusive</code> for single-open mode.</p>
+        <div class="stage">
+          <k-accordion data-exclusive>
+            <details open>
+              <summary>What is Keto UI?</summary>
+              <p>A glass-era component library — under 15 KB, zero dependencies, Apple-inspired aesthetics.</p>
+            </details>
+            <details>
+              <summary>How does glass styling work?</summary>
+              <p>Keto uses <code>backdrop-filter: blur()</code> and RGBA surfaces to create frosted glass panels.</p>
+            </details>
+            <details>
+              <summary>Does it need a build step?</summary>
+              <p>No. Drop in one CSS and one JS file. No webpack, no bundler, no framework.</p>
+            </details>
+          </k-accordion>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;k-accordion data-exclusive&gt;
+  &lt;details open&gt;
+    &lt;summary&gt;What is Keto UI?&lt;/summary&gt;
+    &lt;p&gt;Glass-era library under 15 KB.&lt;/p&gt;
+  &lt;/details&gt;
+  &lt;details&gt;
+    &lt;summary&gt;Another question&lt;/summary&gt;
+    &lt;p&gt;Answer here.&lt;/p&gt;
+  &lt;/details&gt;
+&lt;/k-accordion&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Alert ═══ -->
+      <section class="comp reveal" id="alert">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#alert">Alert</a></h2>
+        <p class="desc">Translucent notification banners. Use <code>role="alert"</code> with <code>data-type</code> for variants.</p>
+        <div class="stage">
+          <div role="alert"><strong>Info</strong> Default informational alert message.</div>
+          <div role="alert" data-type="success"><strong>Success!</strong> Your changes have been saved.</div>
+          <div role="alert" data-type="warning"><strong>Warning</strong> Please review before continuing.</div>
+          <div role="alert" data-type="danger"><strong>Error!</strong> Something went wrong.</div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div role="alert" data-type="success"&gt;
+  &lt;strong&gt;Success!&lt;/strong&gt; Your changes have been saved.
+&lt;/div&gt;
+&lt;div role="alert" data-type="warning"&gt;...&lt;/div&gt;
+&lt;div role="alert" data-type="danger"&gt;...&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Badge ═══ -->
+      <section class="comp reveal" id="badge">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#badge">Badge</a></h2>
+        <p class="desc">Translucent pill-shaped tags via <code>data-badge</code>.</p>
+        <div class="stage">
+          <div class="stage-row">
+            <span data-badge>Default</span>
+            <span data-badge="secondary">Secondary</span>
+            <span data-badge="success">Success</span>
+            <span data-badge="warning">Warning</span>
+            <span data-badge="danger">Danger</span>
+            <span data-badge="info">Info</span>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;span data-badge&gt;Default&lt;/span&gt;
+&lt;span data-badge="success"&gt;Success&lt;/span&gt;
+&lt;span data-badge="warning"&gt;Warning&lt;/span&gt;
+&lt;span data-badge="danger"&gt;Danger&lt;/span&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Button ═══ -->
+      <section class="comp reveal" id="button">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#button">Button</a></h2>
+        <p class="desc">Glass-styled buttons with spring animations. Use <code>data-variant</code> for intent.</p>
+        <div class="stage">
+          <div class="stage-row">
+            <button>Primary</button>
+            <button data-variant="secondary">Secondary</button>
+            <button data-variant="danger">Danger</button>
+            <button data-variant="outline">Outline</button>
+            <button data-variant="ghost">Ghost</button>
+            <button disabled>Disabled</button>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;button&gt;Primary&lt;/button&gt;
+&lt;button data-variant="secondary"&gt;Secondary&lt;/button&gt;
+&lt;button data-variant="danger"&gt;Danger&lt;/button&gt;
+&lt;button data-variant="outline"&gt;Outline&lt;/button&gt;
+&lt;button data-variant="ghost"&gt;Ghost&lt;/button&gt;
+&lt;button disabled&gt;Disabled&lt;/button&gt;</code></pre>
+        </div>
+
+        <h3>Sizes</h3>
+        <div class="stage">
+          <div class="stage-row">
+            <button data-size="sm">Small</button>
+            <button>Default</button>
+            <button data-size="lg">Large</button>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;button data-size="sm"&gt;Small&lt;/button&gt;
+&lt;button&gt;Default&lt;/button&gt;
+&lt;button data-size="lg"&gt;Large&lt;/button&gt;</code></pre>
+        </div>
+
+        <h3>Button Group</h3>
+        <div class="stage">
+          <div class="btn-group">
+            <button>Left</button>
+            <button>Center</button>
+            <button>Right</button>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div class="btn-group"&gt;
+  &lt;button&gt;Left&lt;/button&gt;
+  &lt;button&gt;Center&lt;/button&gt;
+  &lt;button&gt;Right&lt;/button&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+
+        <h3>Loading</h3>
+        <div class="stage">
+          <button aria-busy="true">Saving…</button>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;button aria-busy="true"&gt;Saving…&lt;/button&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Card ═══ -->
+      <section class="comp reveal" id="card">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#card">Card</a></h2>
+        <p class="desc">Glass-panel cards with frosted backgrounds. Use <code>&lt;article&gt;</code> with <code>&lt;header&gt;</code>, <code>&lt;section&gt;</code>, <code>&lt;footer&gt;</code>.</p>
+        <div class="stage">
+          <article style="max-width:26rem;">
+            <header>
+              <h4>Card Title</h4>
+              <p>A brief description of this card's purpose.</p>
+            </header>
+            <section><p style="margin:0">Cards support any HTML content — forms, images, lists, or nested components.</p></section>
+            <footer>
+              <button data-variant="outline" data-size="sm">Cancel</button>
+              <button data-size="sm">Save</button>
+            </footer>
+          </article>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;article&gt;
+  &lt;header&gt;
+    &lt;h4&gt;Card Title&lt;/h4&gt;
+    &lt;p&gt;Description&lt;/p&gt;
+  &lt;/header&gt;
+  &lt;section&gt;&lt;p&gt;Card content.&lt;/p&gt;&lt;/section&gt;
+  &lt;footer&gt;
+    &lt;button data-variant="outline"&gt;Cancel&lt;/button&gt;
+    &lt;button&gt;Save&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/article&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Dialog ═══ -->
+      <section class="comp reveal" id="dialog">
+        <span class="comp-label">CSS + JS</span>
+        <h2><a href="#dialog">Dialog</a></h2>
+        <p class="desc">Frosted glass modals with the native <code>&lt;dialog&gt;</code> element. Backdrop blur, spring animation, focus trapping.</p>
+        <div class="stage">
+          <button data-modal-open="demo-dialog">Open dialog</button>
+          <dialog id="demo-dialog">
+            <header>
+              <h3>Confirm action</h3>
+              <button data-modal-close aria-label="Close">×</button>
+            </header>
+            <section>
+              <p>This dialog uses the native <code>&lt;dialog&gt;</code> element with frosted glass styling. Click outside or press Escape to close.</p>
+            </section>
+            <footer>
+              <button data-variant="ghost" data-modal-close>Cancel</button>
+              <button>Confirm</button>
+            </footer>
+          </dialog>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;button data-modal-open="my-dialog"&gt;Open&lt;/button&gt;
+&lt;dialog id="my-dialog"&gt;
+  &lt;header&gt;
+    &lt;h3&gt;Title&lt;/h3&gt;
+    &lt;button data-modal-close&gt;×&lt;/button&gt;
+  &lt;/header&gt;
+  &lt;section&gt;&lt;p&gt;Content&lt;/p&gt;&lt;/section&gt;
+  &lt;footer&gt;
+    &lt;button data-variant="ghost" data-modal-close&gt;Cancel&lt;/button&gt;
+    &lt;button&gt;Confirm&lt;/button&gt;
+  &lt;/footer&gt;
+&lt;/dialog&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Dropdown ═══ -->
+      <section class="comp reveal" id="dropdown">
+        <span class="comp-label wc">Web Component</span>
+        <h2><a href="#dropdown">Dropdown</a></h2>
+        <p class="desc">Glass-panel dropdown menus. Use <code>slot="trigger"</code> and <code>slot="menu"</code> inside <code>&lt;k-dropdown&gt;</code>.</p>
+        <div class="stage">
+          <k-dropdown>
+            <button slot="trigger" data-variant="outline">
+              Options
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m6 9 6 6 6-6"/></svg>
+            </button>
+            <div slot="menu">
+              <a href="#">Profile</a>
+              <a href="#">Settings</a>
+              <a href="#">Help</a>
+              <hr>
+              <a href="#">Logout</a>
+            </div>
+          </k-dropdown>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;k-dropdown&gt;
+  &lt;button slot="trigger" data-variant="outline"&gt;Options ▾&lt;/button&gt;
+  &lt;div slot="menu"&gt;
+    &lt;a href="#"&gt;Profile&lt;/a&gt;
+    &lt;a href="#"&gt;Settings&lt;/a&gt;
+    &lt;hr&gt;
+    &lt;a href="#"&gt;Logout&lt;/a&gt;
+  &lt;/div&gt;
+&lt;/k-dropdown&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Forms ═══ -->
+      <section class="comp reveal" id="form">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#form">Form Elements</a></h2>
+        <p class="desc">Every control gets glass styling automatically — inputs, selects, textareas, checkboxes, radios, and toggle switches.</p>
+        <div class="stage" style="max-width:30rem">
+          <div class="form-group">
+            <label for="d-name">Name</label>
+            <input type="text" id="d-name" placeholder="Enter your name">
+          </div>
+          <div class="form-group">
+            <label for="d-email">Email</label>
+            <input type="email" id="d-email" placeholder="you@example.com">
+            <p class="form-hint">We'll never share your email.</p>
+          </div>
+          <div class="form-group">
+            <label for="d-role">Role</label>
+            <select id="d-role">
+              <option value="" disabled selected>Select a role</option>
+              <option>Developer</option>
+              <option>Designer</option>
+              <option>Manager</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="d-bio">Bio</label>
+            <textarea id="d-bio" placeholder="Tell us about yourself…" rows="3"></textarea>
+          </div>
+          <div class="form-group">
+            <label><input type="checkbox"> I agree to the terms</label>
+          </div>
+          <div class="form-group">
+            <div class="stage-row">
+              <label><input type="radio" name="d-plan" checked> Free</label>
+              <label><input type="radio" name="d-plan"> Pro</label>
+              <label><input type="radio" name="d-plan"> Team</label>
+            </div>
+          </div>
+          <div class="form-group">
+            <label class="switch">
+              <input type="checkbox" checked>
+              Notifications
+            </label>
+          </div>
+          <button>Submit</button>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div class="form-group"&gt;
+  &lt;label for="name"&gt;Name&lt;/label&gt;
+  &lt;input type="text" id="name" placeholder="Enter your name"&gt;
+&lt;/div&gt;
+&lt;div class="form-group"&gt;
+  &lt;label&gt;&lt;input type="checkbox"&gt; I agree&lt;/label&gt;
+&lt;/div&gt;
+&lt;label class="switch"&gt;
+  &lt;input type="checkbox"&gt; Notifications
+&lt;/label&gt;</code></pre>
+        </div>
+
+        <h3>Validation</h3>
+        <div class="stage" style="max-width:30rem">
+          <div class="form-group">
+            <label for="d-err">Field with error</label>
+            <input type="text" id="d-err" aria-invalid="true" value="Bad input">
+            <p class="form-error">This field is required.</p>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;input type="text" aria-invalid="true" value="Bad input"&gt;
+&lt;p class="form-error"&gt;This field is required.&lt;/p&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Progress ═══ -->
+      <section class="comp reveal" id="progress">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#progress">Progress</a></h2>
+        <p class="desc">Native <code>&lt;progress&gt;</code> with glass-tinted fills. Use <code>data-variant</code> for color.</p>
+        <div class="stage">
+          <progress value="70" max="100"></progress>
+          <progress value="50" max="100" data-variant="success"></progress>
+          <progress value="35" max="100" data-variant="warning"></progress>
+          <progress value="15" max="100" data-variant="danger"></progress>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;progress value="70" max="100"&gt;&lt;/progress&gt;
+&lt;progress value="50" max="100" data-variant="success"&gt;&lt;/progress&gt;
+&lt;progress value="35" max="100" data-variant="warning"&gt;&lt;/progress&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Spinner ═══ -->
+      <section class="comp reveal" id="spinner">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#spinner">Spinner</a></h2>
+        <p class="desc">CSS-only loading spinners. Scales from inline to full-overlay.</p>
+        <div class="stage">
+          <div class="stage-row">
+            <div class="spinner spinner-sm"></div>
+            <div class="spinner"></div>
+            <div class="spinner spinner-lg"></div>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div class="spinner spinner-sm"&gt;&lt;/div&gt;
+&lt;div class="spinner"&gt;&lt;/div&gt;
+&lt;div class="spinner spinner-lg"&gt;&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Skeleton ═══ -->
+      <section class="comp reveal" id="skeleton">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#skeleton">Skeleton</a></h2>
+        <p class="desc">Animated shimmer placeholders that match your glass theme.</p>
+        <div class="stage">
+          <div style="max-width:22rem">
+            <div style="display:flex;gap:0.75rem;align-items:center;margin-bottom:1rem">
+              <div class="skeleton skeleton-circle" style="width:2.5rem;height:2.5rem"></div>
+              <div style="flex:1">
+                <div class="skeleton skeleton-text" style="width:60%"></div>
+                <div class="skeleton skeleton-text"></div>
+              </div>
+            </div>
+            <div class="skeleton" style="height:5rem;margin-bottom:0.75rem"></div>
+            <div class="skeleton skeleton-text"></div>
+            <div class="skeleton skeleton-text"></div>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div class="skeleton skeleton-circle" style="width:2.5rem;height:2.5rem"&gt;&lt;/div&gt;
+&lt;div class="skeleton skeleton-text"&gt;&lt;/div&gt;
+&lt;div class="skeleton" style="height:5rem"&gt;&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Table ═══ -->
+      <section class="comp reveal" id="table">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#table">Table</a></h2>
+        <p class="desc">Clean data tables with frosted headers. Wrap in <code>.table-wrap</code> for horizontal scroll.</p>
+        <div class="stage">
+          <div class="table-wrap" style="margin:0">
+            <table data-striped>
+              <thead>
+                <tr><th>Name</th><th>Email</th><th>Role</th><th>Status</th></tr>
+              </thead>
+              <tbody>
+                <tr><td>Alice Johnson</td><td>alice@example.com</td><td>Admin</td><td><span data-badge="success">Active</span></td></tr>
+                <tr><td>Bob Smith</td><td>bob@example.com</td><td>Editor</td><td><span data-badge>Active</span></td></tr>
+                <tr><td>Carol White</td><td>carol@example.com</td><td>Viewer</td><td><span data-badge="secondary">Pending</span></td></tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div class="table-wrap"&gt;
+  &lt;table data-striped&gt;
+    &lt;thead&gt;&lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Email&lt;/th&gt;&lt;th&gt;Role&lt;/th&gt;&lt;/tr&gt;&lt;/thead&gt;
+    &lt;tbody&gt;
+      &lt;tr&gt;&lt;td&gt;Alice&lt;/td&gt;&lt;td&gt;alice@example.com&lt;/td&gt;&lt;td&gt;Admin&lt;/td&gt;&lt;/tr&gt;
+    &lt;/tbody&gt;
+  &lt;/table&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Tabs ═══ -->
+      <section class="comp reveal" id="tabs">
+        <span class="comp-label wc">Web Component</span>
+        <h2><a href="#tabs">Tabs</a></h2>
+        <p class="desc">Tabbed navigation with glass active indicators. Arrow/Home/End keyboard navigation built in.</p>
+        <div class="stage">
+          <k-tabs>
+            <button slot="tab" data-panel="tp-account">Account</button>
+            <button slot="tab" data-panel="tp-password">Password</button>
+            <button slot="tab" data-panel="tp-notif">Notifications</button>
+            <div slot="panel" id="tp-account">
+              <h4>Account Settings</h4>
+              <p>Manage your account information here.</p>
+            </div>
+            <div slot="panel" id="tp-password">
+              <h4>Password</h4>
+              <p>Change your password securely.</p>
+            </div>
+            <div slot="panel" id="tp-notif">
+              <h4>Notifications</h4>
+              <p>Configure notification preferences.</p>
+            </div>
+          </k-tabs>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;k-tabs&gt;
+  &lt;button slot="tab" data-panel="account"&gt;Account&lt;/button&gt;
+  &lt;button slot="tab" data-panel="password"&gt;Password&lt;/button&gt;
+  &lt;div slot="panel" id="account"&gt;...&lt;/div&gt;
+  &lt;div slot="panel" id="password"&gt;...&lt;/div&gt;
+&lt;/k-tabs&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Tooltip ═══ -->
+      <section class="comp reveal" id="tooltip">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#tooltip">Tooltip</a></h2>
+        <p class="desc">CSS-only tooltips via <code>data-tooltip</code>. Supports multiple positions.</p>
+        <div class="stage">
+          <div class="stage-row">
+            <button data-tooltip="Save your changes">Hover me</button>
+            <button data-tooltip="Delete this item" data-variant="danger">Delete</button>
+            <span data-tooltip="Bottom tooltip" data-tooltip-pos="bottom" style="cursor:help;text-decoration:underline;text-decoration-style:dotted;color:var(--k-text-sec)">Bottom</span>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;button data-tooltip="Save your changes"&gt;Hover me&lt;/button&gt;
+&lt;span data-tooltip="Tooltip text" data-tooltip-pos="bottom"&gt;Bottom&lt;/span&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Toast ═══ -->
+      <section class="comp reveal" id="toast">
+        <span class="comp-label wc">Web Component</span>
+        <h2><a href="#toast">Toast</a></h2>
+        <p class="desc">Glass toast notifications via <code>Keto.toast()</code>. Auto-dismiss, multiple types and positions.</p>
+        <div class="stage">
+          <div class="stage-row">
+            <button onclick="Keto.toast('Default toast notification.')">Default</button>
+            <button onclick="Keto.toast('Operation completed!',{type:'success'})">Success</button>
+            <button onclick="Keto.toast('Something went wrong.',{type:'danger'})">Error</button>
+            <button onclick="Keto.toast('Check this out.',{type:'warning'})">Warning</button>
+            <button onclick="Keto.toast('Update available.',{type:'info'})">Info</button>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>Keto.toast('Default toast.');
+Keto.toast('Saved!', { type: 'success' });
+Keto.toast('Failed.', { type: 'danger' });
+Keto.toast('Review this.', { type: 'warning', duration: 5000 });
+Keto.toast('Persistent.', { type: 'info', persistent: true });</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Avatar ═══ -->
+      <section class="comp reveal" id="avatar">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#avatar">Avatar</a></h2>
+        <p class="desc">Circular avatar with <code>.avatar</code>. Supports sizes <code>.avatar-sm</code> and <code>.avatar-lg</code>.</p>
+        <div class="stage">
+          <div class="stage-row">
+            <div class="avatar avatar-sm">DS</div>
+            <div class="avatar">DS</div>
+            <div class="avatar avatar-lg">DS</div>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div class="avatar avatar-sm"&gt;DS&lt;/div&gt;
+&lt;div class="avatar"&gt;DS&lt;/div&gt;
+&lt;div class="avatar avatar-lg"&gt;DS&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Grid ═══ -->
+      <section class="comp reveal" id="grid">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#grid">Grid</a></h2>
+        <p class="desc">CSS grid helpers: <code>.grid-2</code>, <code>.grid-3</code>, <code>.grid-4</code>, <code>.grid-auto</code>. Collapse on mobile.</p>
+        <div class="stage">
+          <div class="grid grid-3" style="text-align:center;font-size:0.875rem">
+            <div style="padding:0.75rem;background:var(--k-surface-alt);border-radius:var(--k-rad)">col</div>
+            <div style="padding:0.75rem;background:var(--k-surface-alt);border-radius:var(--k-rad)">col</div>
+            <div style="padding:0.75rem;background:var(--k-surface-alt);border-radius:var(--k-rad)">col</div>
+          </div>
+        </div>
+        <div class="code-wrap collapsed">
+          <button class="code-btn" onclick="this.parentElement.classList.toggle('collapsed')">&#9654; View code</button>
+<pre><code>&lt;div class="grid grid-3"&gt;
+  &lt;div&gt;col&lt;/div&gt;
+  &lt;div&gt;col&lt;/div&gt;
+  &lt;div&gt;col&lt;/div&gt;
+&lt;/div&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Utilities ═══ -->
+      <section class="comp reveal" id="utilities">
+        <span class="comp-label">CSS</span>
+        <h2><a href="#utilities">Utilities</a></h2>
+        <p class="desc">Minimal utility classes for spacing, display, text, sizing, and layout.</p>
+        <div class="stage" style="font-size:0.875rem">
+          <p><strong>Spacing:</strong> <code>.m-0</code> <code>.mt-4</code> <code>.mb-2</code> <code>.mb-4</code> <code>.p-0</code> <code>.p-4</code></p>
+          <p><strong>Display:</strong> <code>.block</code> <code>.inline-block</code> <code>.hidden</code> <code>.sr-only</code></p>
+          <p><strong>Text:</strong> <code>.text-center</code> <code>.text-right</code> <code>.text-bold</code> <code>.text-sm</code> <code>.text-muted</code> <code>.truncate</code></p>
+          <p><strong>Flex:</strong> <code>.flex</code> <code>.flex-col</code> <code>.flex-center</code> <code>.flex-between</code> <code>.gap-2</code> <code>.gap-4</code></p>
+          <p style="margin:0"><strong>Other:</strong> <code>.avatar</code> <code>.divider</code> <code>.tag</code> <code>.w-full</code> <code>.max-w-md</code></p>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           THEMING
+           ═══════════════════════════════════════════ -->
+      <section class="comp reveal" id="theming" style="border-top:none;padding-top:var(--k-sp-10)">
+        <span class="comp-label">Customization</span>
+        <h2><a href="#theming">Theming</a></h2>
+        <p class="desc">Override a few <code>--k-*</code> tokens and every glass surface, shadow, and accent re-skins itself. Try the live presets.</p>
+
+        <div class="theme-grid">
+          <div class="theme-card active" onclick="applyTheme('default',this)">
+            <div class="swatch">
+              <span style="background:#007AFF"></span>
+              <span style="background:#F5F5F7"></span>
+              <span style="background:#1d1d1f"></span>
+            </div>
+            <div class="label">Default</div>
+          </div>
+          <div class="theme-card" onclick="applyTheme('midnight',this)">
+            <div class="swatch">
+              <span style="background:#818cf8"></span>
+              <span style="background:#0f0e1a"></span>
+              <span style="background:#f5f5f7"></span>
+            </div>
+            <div class="label">Midnight</div>
+          </div>
+        </div>
+
+        <div class="theme-live" id="theme-live">
+          <h4 style="margin-bottom:0.25rem">Live Preview</h4>
+          <p style="color:var(--k-text-sec);font-size:0.875rem;margin-bottom:1rem">Switch themes above to see every token update.</p>
+          <div style="display:flex;gap:0.5rem;margin-bottom:1rem">
+            <button>Primary</button>
+            <button data-variant="secondary">Secondary</button>
+            <button data-variant="outline">Outline</button>
+          </div>
+          <div style="display:flex;gap:0.5rem;margin-bottom:1rem">
+            <span data-badge>Default</span>
+            <span data-badge="success">Success</span>
+            <span data-badge="danger">Danger</span>
+          </div>
+          <progress value="65" max="100" style="width:100%"></progress>
+        </div>
+
+        <h3>Preset code</h3>
+        <p style="font-size:0.9375rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">Click a preset above — the code below updates to show exactly what it overrides:</p>
+        <div class="code-solo" id="theme-code-block">
+<pre><code id="theme-code">/* Default — no overrides needed.
+ * Keto ships with a blue palette
+ * and Apple Glass effects out of the box.
+ *
+ * Override --k-* variables on :root to customize.
+ */</code></pre>
+        </div>
+
+        <h3>Create your own theme</h3>
+        <p style="font-size:0.9375rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">Pick any accent color and build a full theme in 3 steps. You only need to override the tokens you want to change — everything else inherits the defaults.</p>
+
+        <p style="font-size:0.9375rem;margin-bottom:var(--k-sp-2)"><strong>Step 1 — Choose an accent color</strong></p>
+        <p style="font-size:0.875rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">Set <code>--k-primary</code> and its hover/active/light variants. The <code>-light</code> variant should be your accent at ~10% opacity.</p>
+        <div class="code-solo">
+<pre><code>:root {
+  --k-primary: #7c3aed;
+  --k-primary-hover: #6d28d9;
+  --k-primary-active: #5b21b6;
+  --k-primary-fg: #ffffff;
+  --k-primary-light: rgba(124, 58, 237, 0.1);
+}</code></pre>
+        </div>
+
+        <p style="font-size:0.9375rem;margin-bottom:var(--k-sp-2)"><strong>Step 2 — Set the surface palette</strong></p>
+        <p style="font-size:0.875rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">Adjust the background, text, and border colors to complement your accent. For light themes, tint <code>--k-bg</code> toward your accent. For dark themes, use deep dark values and invert glass opacities.</p>
+        <div class="code-solo">
+<pre><code>:root {
+  /* Light purple theme */
+  --k-bg: #faf5ff;
+  --k-surface: rgba(255, 255, 255, 0.75);
+  --k-text: #2e1065;
+  --k-text-sec: #6b21a8;
+  --k-text-ter: #a78bfa;
+  --k-border: rgba(124, 58, 237, 0.1);
+}</code></pre>
+        </div>
+
+        <p style="font-size:0.9375rem;margin-bottom:var(--k-sp-2)"><strong>Step 3 — Tune the glass layer</strong></p>
+        <p style="font-size:0.875rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">The glass tokens control every translucent panel — cards, dialogs, dropdowns, tooltips, and the navbar. Adjust opacity and tint to match your palette.</p>
+        <div class="code-solo">
+<pre><code>:root {
+  --k-glass-bg: rgba(255, 255, 255, 0.7);
+  --k-glass-bg-heavy: rgba(255, 255, 255, 0.88);
+  --k-glass-border: rgba(124, 58, 237, 0.12);
+  --k-glass-shadow: 0 8px 32px rgba(124, 58, 237, 0.06);
+}</code></pre>
+        </div>
+
+        <p style="font-size:0.9375rem;margin-bottom:var(--k-sp-2)"><strong>Full example — Violet theme</strong></p>
+        <div class="code-solo">
+<pre><code>:root {
+  --k-primary: #7c3aed;
+  --k-primary-hover: #6d28d9;
+  --k-primary-active: #5b21b6;
+  --k-primary-fg: #ffffff;
+  --k-primary-light: rgba(124, 58, 237, 0.1);
+
+  --k-bg: #faf5ff;
+  --k-surface: rgba(255, 255, 255, 0.75);
+  --k-text: #2e1065;
+  --k-text-sec: #6b21a8;
+  --k-text-ter: #a78bfa;
+  --k-border: rgba(124, 58, 237, 0.1);
+
+  --k-glass-bg: rgba(255, 255, 255, 0.7);
+  --k-glass-bg-heavy: rgba(255, 255, 255, 0.88);
+  --k-glass-border: rgba(124, 58, 237, 0.12);
+  --k-glass-shadow: 0 8px 32px rgba(124, 58, 237, 0.06);
+}</code></pre>
+        </div>
+
+        <h3>Extend a preset at runtime</h3>
+        <p style="font-size:0.9375rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">Use JavaScript to switch or extend themes dynamically. Override any token on <code>document.documentElement.style</code>:</p>
+        <div class="code-solo">
+<pre><code>// Apply a full theme at runtime
+function setTheme(vars) {
+  const root = document.documentElement.style;
+  Object.entries(vars).forEach(([k, v]) => root.setProperty(k, v));
+}
+
+// Example: switch to a Sunset theme
+setTheme({
+  '--k-primary': '#f97316',
+  '--k-primary-hover': '#ea580c',
+  '--k-primary-light': 'rgba(249, 115, 22, 0.1)',
+  '--k-bg': '#fff7ed',
+  '--k-text': '#431407',
+  '--k-glass-bg': 'rgba(255, 255, 255, 0.72)',
+});
+
+// Reset back to defaults
+function resetTheme(keys) {
+  keys.forEach(k => document.documentElement.style.removeProperty(k));
+}
+
+// Extend an existing theme — just add more overrides
+setTheme({ '--k-rad': '16px', '--k-rad-lg': '22px' });</code></pre>
+        </div>
+
+        <h3>Scoped themes</h3>
+        <p style="font-size:0.9375rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">CSS variable inheritance means you can theme any section independently. Just scope your overrides to a container class:</p>
+        <div class="code-solo">
+<pre><code>.dark-panel {
+  --k-primary: #818cf8;
+  --k-bg: #0f0e1a;
+  --k-text: #f5f5f7;
+  --k-text-sec: #a1a1a6;
+  --k-glass-bg: rgba(22, 20, 38, 0.65);
+  --k-glass-border: rgba(255, 255, 255, 0.1);
+
+  background: var(--k-bg);
+  color: var(--k-text);
+  padding: 2rem;
+  border-radius: var(--k-rad-xl);
+}
+
+/* All Keto components inside .dark-panel
+   automatically pick up the scoped tokens */</code></pre>
+        </div>
+
+        <h3>Dark mode</h3>
+        <p style="font-size:0.9375rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">Keto ships with a full dark palette. It automatically respects <code>prefers-color-scheme: dark</code>. You can also force a mode:</p>
+        <div class="code-solo">
+<pre><code>&lt;!-- Auto — follows system preference (default) --&gt;
+&lt;html&gt;
+
+&lt;!-- Force dark --&gt;
+&lt;html data-theme="dark"&gt;
+
+&lt;!-- Force light (even if user's system is dark) --&gt;
+&lt;html data-theme="light"&gt;</code></pre>
+        </div>
+
+        <h3>All design tokens</h3>
+        <p style="font-size:0.9375rem;color:var(--k-text-sec);margin-bottom:var(--k-sp-3)">Complete reference of every <code>--k-*</code> token you can override:</p>
+        <div class="code-solo">
+<pre><code>:root {
+  /* ─── Accent ─── */
+  --k-primary: #007AFF;        /* Main accent color */
+  --k-primary-hover: #0066D6;  /* Hover state */
+  --k-primary-active: #0052AB; /* Active/pressed state */
+  --k-primary-fg: #ffffff;     /* Text on primary backgrounds */
+  --k-primary-light: rgba(0, 122, 255, 0.1); /* Tinted bg for badges/alerts */
+
+  --k-secondary: #8E8E93;
+  --k-secondary-hover: #7C7C82;
+  --k-secondary-light: rgba(142, 142, 147, 0.12);
+
+  /* ─── Status ─── */
+  --k-success: #34C759;
+  --k-warning: #FF9500;
+  --k-danger: #FF3B30;
+  --k-info: #5AC8FA;
+
+  /* ─── Surfaces ─── */
+  --k-bg: #F5F5F7;                         /* Page background */
+  --k-bg-secondary: rgba(255,255,255,0.65); /* Secondary bg */
+  --k-bg-tertiary: rgba(0,0,0,0.03);       /* Code blocks, alt bg */
+  --k-surface: rgba(255,255,255,0.75);      /* Card/table surface */
+  --k-surface-alt: rgba(255,255,255,0.45);  /* Subtle surface */
+
+  /* ─── Text ─── */
+  --k-text: #1d1d1f;     /* Primary text */
+  --k-text-sec: #86868b; /* Secondary/muted text */
+  --k-text-ter: #a1a1a6; /* Tertiary/placeholder text */
+
+  /* ─── Borders ─── */
+  --k-border: rgba(0,0,0,0.08);
+  --k-border-focus: rgba(0,122,255,0.5);
+
+  /* ─── Glass ─── */
+  --k-glass-bg-thin: rgba(255,255,255,0.35);   /* Light frosted panel */
+  --k-glass-bg: rgba(255,255,255,0.65);         /* Standard frosted panel */
+  --k-glass-bg-heavy: rgba(255,255,255,0.85);   /* Opaque frosted panel */
+  --k-glass-blur: 24px;                          /* Standard blur amount */
+  --k-glass-blur-heavy: 40px;                    /* Heavy blur (dialog, nav) */
+  --k-glass-border-thin: rgba(255,255,255,0.2);
+  --k-glass-border: rgba(255,255,255,0.4);
+  --k-glass-border-heavy: rgba(255,255,255,0.6);
+  --k-glass-shadow-sm: 0 4px 12px rgba(0,0,0,0.04);
+  --k-glass-shadow: 0 8px 32px rgba(0,0,0,0.08);
+  --k-glass-shadow-lg: 0 16px 48px rgba(0,0,0,0.12),
+                        0 0 0 1px rgba(255,255,255,0.3) inset;
+
+  /* ─── Shape ─── */
+  --k-rad-sm: 6px;
+  --k-rad: 10px;
+  --k-rad-lg: 14px;
+  --k-rad-xl: 20px;
+  --k-rad-2xl: 24px;
+  --k-rad-full: 9999px;
+
+  /* ─── Spacing ─── */
+  --k-sp-1: 0.25rem;  --k-sp-2: 0.5rem;
+  --k-sp-3: 0.75rem;  --k-sp-4: 1rem;
+  --k-sp-5: 1.5rem;   --k-sp-6: 2rem;
+  --k-sp-8: 3rem;     --k-sp-10: 4rem;
+
+  /* ─── Motion ─── */
+  --k-ease: cubic-bezier(0.2, 0.8, 0.2, 1);
+  --k-ease-spring: cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  --k-ease-spring-bouncy: cubic-bezier(0.34, 1.56, 0.64, 1);
+  --k-trans: 0.2s var(--k-ease);
+  --k-trans-slow: 0.4s var(--k-ease);
+  --k-trans-fast: 0.1s cubic-bezier(0, 0, 0.2, 1);
+
+  /* ─── Z-index ─── */
+  --k-z-base: 1;   --k-z-drop: 100;
+  --k-z-nav: 200;  --k-z-modal: 300;
+  --k-z-toast: 400;
+}</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══════════════════════════════════════════
+           INSTALLATION
+           ═══════════════════════════════════════════ -->
+      <section class="comp reveal" id="install" style="border-top:none;padding-top:var(--k-sp-10)">
+        <span class="comp-label">Getting Started</span>
+        <h2><a href="#install">Installation</a></h2>
+        <p class="desc">Two files. No npm, no webpack, no configuration.</p>
+
+        <h3>CDN — jsDelivr (pinned)</h3>
+        <div class="code-solo">
+<pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ketoui@0.1.2/dist/keto.min.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/ketoui@0.1.2/dist/keto.js" defer&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <h3>CDN — unpkg (pinned)</h3>
+        <div class="code-solo">
+<pre><code>&lt;link rel="stylesheet" href="https://unpkg.com/ketoui@0.1.2/dist/keto.min.css"&gt;
+&lt;script src="https://unpkg.com/ketoui@0.1.2/dist/keto.js" defer&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <h3>CDN — latest (for demos)</h3>
+        <div class="code-solo">
+<pre><code>&lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ketoui@latest/dist/keto.min.css"&gt;
+&lt;script src="https://cdn.jsdelivr.net/npm/ketoui@latest/dist/keto.js" defer&gt;&lt;/script&gt;</code></pre>
+        </div>
+
+        <h3>npm</h3>
+        <div class="code-solo">
+<pre><code>npm install ketoui
+npm install ketoui@0.1.2</code></pre>
+        </div>
+
+        <h3>Starter template</h3>
+        <div class="code-solo">
+<pre><code>&lt;!DOCTYPE html&gt;
+&lt;html lang="en"&gt;
+&lt;head&gt;
+  &lt;meta charset="UTF-8"&gt;
+  &lt;meta name="viewport" content="width=device-width, initial-scale=1.0"&gt;
+  &lt;title&gt;My App&lt;/title&gt;
+  &lt;link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/ketoui@0.1.2/dist/keto.min.css"&gt;
+  &lt;script src="https://cdn.jsdelivr.net/npm/ketoui@0.1.2/dist/keto.js" defer&gt;&lt;/script&gt;
+&lt;/head&gt;
+&lt;body&gt;
+  &lt;h1&gt;Hello World&lt;/h1&gt;
+  &lt;p&gt;Styled automatically.&lt;/p&gt;
+  &lt;button&gt;Click me&lt;/button&gt;
+
+  &lt;article&gt;
+    &lt;header&gt;&lt;h3&gt;Glass Card&lt;/h3&gt;&lt;/header&gt;
+    &lt;section&gt;&lt;p&gt;Frosted glass — zero effort.&lt;/p&gt;&lt;/section&gt;
+  &lt;/article&gt;
+&lt;/body&gt;
+&lt;/html&gt;</code></pre>
+        </div>
+      </section>
+
+      <!-- ═══ Footer ═══ -->
+      <footer class="doc-footer reveal">
+        <p>Built by Devvrat Sharma · MIT License</p>
+      </footer>
+
+    </div>
+  </div>
+
+  <script>
+    // ── Scroll reveal ──
+    const revealObserver = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+    }, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+    document.querySelectorAll('.reveal').forEach(el => revealObserver.observe(el));
+
+    // ── Dark mode toggle ──
+    function toggleMode() {
+      const html = document.documentElement;
+      const isDark = html.getAttribute('data-theme') === 'dark';
+      html.setAttribute('data-theme', isDark ? 'light' : 'dark');
+      document.getElementById('mode-btn').textContent = isDark ? '◐' : '☀️';
+
+      // Reset theme presets to default when toggling mode
+      if (savedOriginals) {
+        Object.keys(savedOriginals).forEach(k => html.style.removeProperty(k));
+        savedOriginals = null;
+      }
+      document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+      document.querySelector('.theme-card')?.classList.add('active');
+      const codeEl = document.getElementById('theme-code');
+      if (codeEl) codeEl.textContent = themes.default.code;
+    }
+
+    // ── Theme presets ──
+    const themes = {
+      default: {
+        vars: {},
+        code: '/* Default — no overrides needed.\n * Keto ships with a blue palette\n * and Apple Glass effects out of the box.\n *\n * Override --k-* variables on :root to customize.\n */'
+      },
+      rose: {
+        vars: {
+          '--k-primary': '#e11d48', '--k-primary-hover': '#be123c', '--k-primary-active': '#9f1239',
+          '--k-primary-light': 'rgba(225,29,72,0.1)', '--k-primary-fg': '#fff',
+          '--k-bg': '#fef2f2', '--k-bg-secondary': 'rgba(255,255,255,0.65)',
+          '--k-surface': 'rgba(255,255,255,0.75)',
+          '--k-text': '#1c1917', '--k-text-sec': '#44403c', '--k-text-ter': '#78716c',
+          '--k-glass-bg': 'rgba(255,255,255,0.72)', '--k-glass-bg-heavy': 'rgba(255,255,255,0.88)',
+          '--k-glass-border': 'rgba(0,0,0,0.08)', '--k-glass-shadow': '0 4px 30px rgba(225,29,72,0.06)',
+          '--k-border': 'rgba(0,0,0,0.08)',
+        },
+        code: '/* Rose Gold */\n:root {\n  --k-primary: #e11d48;\n  --k-primary-hover: #be123c;\n  --k-bg: #fef2f2;\n  --k-text: #1c1917;\n  --k-text-sec: #44403c;\n  --k-glass-bg: rgba(255,255,255,0.72);\n}'
+      },
+      midnight: {
+        vars: {
+          '--k-primary': '#818cf8', '--k-primary-hover': '#a5b4fc', '--k-primary-active': '#6366f1',
+          '--k-primary-light': 'rgba(129,140,248,0.15)', '--k-primary-fg': '#0f0e1a',
+          '--k-bg': '#0f0e1a', '--k-bg-secondary': 'rgba(22,20,38,0.72)', '--k-bg-tertiary': 'rgba(35,32,58,0.6)',
+          '--k-surface': 'rgba(22,20,38,0.72)', '--k-surface-alt': 'rgba(255,255,255,0.06)',
+          '--k-text': '#f5f5f7', '--k-text-sec': '#a1a1a6', '--k-text-ter': '#636366',
+          '--k-border': 'rgba(255,255,255,0.08)',
+          '--k-glass-bg': 'rgba(22,20,38,0.65)', '--k-glass-bg-thin': 'rgba(22,20,38,0.35)',
+          '--k-glass-bg-heavy': 'rgba(22,20,38,0.85)',
+          '--k-glass-border': 'rgba(255,255,255,0.1)', '--k-glass-border-thin': 'rgba(255,255,255,0.05)',
+          '--k-glass-border-heavy': 'rgba(255,255,255,0.2)',
+          '--k-glass-shadow': '0 4px 30px rgba(0,0,0,0.2)',
+          '--k-success': '#4ade80', '--k-warning': '#fbbf24', '--k-danger': '#f87171', '--k-info': '#60a5fa',
+          '--k-secondary': '#94a3b8', '--k-secondary-light': 'rgba(148,163,184,0.1)',
+        },
+        code: '/* Midnight */\n:root {\n  --k-primary: #818cf8;\n  --k-bg: #0f0e1a;\n  --k-surface: rgba(22,20,38,0.72);\n  --k-text: #f5f5f7;\n  --k-text-sec: #a1a1a6;\n  --k-border: rgba(255,255,255,0.08);\n  --k-glass-bg: rgba(22,20,38,0.65);\n  --k-glass-border: rgba(255,255,255,0.1);\n}'
+      },
+      forest: {
+        vars: {
+          '--k-primary': '#16a34a', '--k-primary-hover': '#15803d', '--k-primary-active': '#166534',
+          '--k-primary-light': 'rgba(22,163,74,0.1)', '--k-primary-fg': '#fff',
+          '--k-bg': '#f0fdf4', '--k-bg-secondary': 'rgba(255,255,255,0.65)',
+          '--k-surface': 'rgba(255,255,255,0.75)',
+          '--k-text': '#1a2e1a', '--k-text-sec': '#3d5a3d', '--k-text-ter': '#6b8a6b',
+          '--k-glass-bg': 'rgba(255,255,255,0.72)', '--k-glass-bg-heavy': 'rgba(255,255,255,0.88)',
+          '--k-glass-border': 'rgba(0,0,0,0.08)', '--k-glass-shadow': '0 4px 30px rgba(22,163,74,0.06)',
+          '--k-border': 'rgba(0,0,0,0.08)',
+        },
+        code: '/* Forest */\n:root {\n  --k-primary: #16a34a;\n  --k-primary-hover: #15803d;\n  --k-bg: #f0fdf4;\n  --k-text: #1a2e1a;\n  --k-text-sec: #3d5a3d;\n  --k-glass-bg: rgba(255,255,255,0.72);\n}'
+      },
+      ocean: {
+        vars: {
+          '--k-primary': '#0ea5e9', '--k-primary-hover': '#0284c7', '--k-primary-active': '#0369a1',
+          '--k-primary-light': 'rgba(14,165,233,0.1)', '--k-primary-fg': '#fff',
+          '--k-bg': '#f0f9ff', '--k-bg-secondary': 'rgba(255,255,255,0.65)',
+          '--k-surface': 'rgba(255,255,255,0.75)',
+          '--k-text': '#0c4a6e', '--k-text-sec': '#075985', '--k-text-ter': '#0284c7',
+          '--k-glass-bg': 'rgba(255,255,255,0.72)', '--k-glass-bg-heavy': 'rgba(255,255,255,0.88)',
+          '--k-glass-border': 'rgba(0,0,0,0.08)', '--k-glass-shadow': '0 4px 30px rgba(14,165,233,0.06)',
+          '--k-border': 'rgba(0,0,0,0.08)',
+        },
+        code: '/* Ocean */\n:root {\n  --k-primary: #0ea5e9;\n  --k-primary-hover: #0284c7;\n  --k-bg: #f0f9ff;\n  --k-text: #0c4a6e;\n  --k-text-sec: #075985;\n  --k-glass-bg: rgba(255,255,255,0.72);\n}'
+      }
+    };
+
+    let savedOriginals = null;
+
+    function applyTheme(name, card) {
+      const root = document.documentElement;
+      const theme = themes[name];
+      if (!theme) return;
+
+      if (!savedOriginals) {
+        savedOriginals = {};
+        const cs = getComputedStyle(root);
+        const allKeys = new Set();
+        Object.values(themes).forEach(t => Object.keys(t.vars).forEach(k => allKeys.add(k)));
+        allKeys.forEach(k => { savedOriginals[k] = cs.getPropertyValue(k).trim(); });
+      }
+
+      Object.keys(savedOriginals).forEach(k => root.style.removeProperty(k));
+      Object.entries(theme.vars).forEach(([k, v]) => root.style.setProperty(k, v));
+
+      document.querySelectorAll('.theme-card').forEach(c => c.classList.remove('active'));
+      if (card) card.classList.add('active');
+
+      const codeEl = document.getElementById('theme-code');
+      if (codeEl) codeEl.textContent = theme.code;
+    }
+  </script>
+
+</body>
+</html>
