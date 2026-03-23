@@ -32,7 +32,9 @@
     "build:css": "postcss src/keto.css -o dist/keto.min.css",
     "build:js": "terser src/keto.js -o dist/keto.js -c -m && mkdir -p dist/js && for f in src/js/*.js; do terser \"$f\" -o \"dist/js/$(basename $f)\" -c -m; done",
     "build": "mkdir -p dist && npm run build:css && npm run build:js",
-    "prepublishOnly": "npm run build"
+    "prepublishOnly": "npm run build",
+    "deploy": "wrangler deploy",
+    "preview": "wrangler dev"
   },
   "files": [
     "dist/",
@@ -47,6 +49,7 @@
     "postcss": "^8.5.8",
     "postcss-cli": "^11.0.1",
     "postcss-import": "^16.1.1",
-    "terser": "^5.46.1"
+    "terser": "^5.46.1",
+    "wrangler": "^4.76.0"
   }
 }
